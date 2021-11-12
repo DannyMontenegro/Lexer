@@ -10,6 +10,8 @@ tokens = (
     'DIVIDE',
     'LPAREN',
     'RPAREN',
+    'DIVISION_ENTERA',
+    'RESIDUO'
 )
 
 # Regular expression rules for simple tokens
@@ -20,16 +22,21 @@ t_DIVIDE = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 
+#Inicio Danny Montenegro
+t_DIVISION_ENTERA = r'~/'
+t_RESIDUO = r'%'
+
+
+def t_VARIABLE(t):
+    r'[a-zA-Z$_][\w$_]*'
+    t.value = str(t.value)
+    return t
+
 
 # A regular expression rule with some action code
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
-    return t
-
-def t_VARIABLE(t):
-    r'[a-zA-Z$_][\w$_]*'
-    t.value = str(t.value)
     return t
 
 # Define a rule so we can track line numbers
@@ -58,6 +65,8 @@ data = '''
 @asa_AS
 a14$
 15#A
+15~/15
+6%6
 '''
 
 # Give the lexer some input
