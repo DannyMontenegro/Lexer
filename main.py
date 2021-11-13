@@ -43,6 +43,7 @@ tokens = (
     #Parte de Danny Montenegro
     'NUMERO',
     'VARIABLE',
+    'CADENA',
     'SUMA',
     'RESTA',
     'MULTIPLICACION',
@@ -86,6 +87,11 @@ t_DIVISION = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 
+
+def t_CADENA(t):
+    r'\".+\"'
+    t.type = reserved.get(t.value,'CADENA')
+    return t
 
 def t_VARIABLE(t):
     r'[a-zA-Z$_][a-zA-Z\d$_]*'
