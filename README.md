@@ -16,4 +16,4 @@ void saludar (String saludo){
   print (saludo+ "hola"); 
 }
 ```
-![Lexer función](../Imagenes/Lexer función.jpeg)
+![Lexer función](Imagenes/Lexer_funcion.png)
