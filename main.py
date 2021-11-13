@@ -1,7 +1,7 @@
 import ply.lex as lex
 
 reserved = {
-    #Parte de Miguel
+    #Parte de Miguel Licea
     'if':'IF',
     'else':'ELSE',
     'for':'FOR',
@@ -12,21 +12,35 @@ reserved = {
     'double':'DOUBLE',
     'String':'STRING',
     'bool':'BOOL',
-    #Termina parte de Miguel
+    #Termina parte de Miguel Licea
+    #Parte de Danny Montenegro
+    'dynamic':'DYNAMIC',
+    'var':'VAR',
+    'Map':'MAP',
+    'void':'VOID',
+    'Set':'SET',
+    'new':'NEW',
+    'add':'ADD',
+    'List':'LIST',
+    'true':'TRUE',
+    #Termina parte de Danny Montenegro
+
 }
 # List of token names.   This is always required
 tokens = (
-    'NUMBER',
+    #Parte de Danny Montenegro
+    'NUMERO',
+    'ASIGNACION',
     'VARIABLE',
-    'PLUS',
-    'MINUS',
-    'TIMES',
-    'DIVIDE',
+    'SUMA',
+    'RESTA',
+    'MULTIPLICACION',
+    'DIVISION',
     'LPAREN',
     'RPAREN',
     'DIVISION_ENTERA',
-    'RESIDUO'
-    #Parte de Miguel
+    #Termina parte de Danny Montenegro
+    #Parte de Miguel Licea
     'MAYORQUE',
     'NOT',
     'DIVENTERA',
@@ -36,8 +50,35 @@ tokens = (
     'LLAVECIERRA',
     'COMA',
     'DOSPUNTOS',
-    #Termina parte de Miguel
+# Termina parte de Miguel
 )+ tuple(reserved.values())
+
+
+#Parte de Danny Montenegro
+
+t_ASIGNACION = r'\='
+t_DIVISION_ENTERA = r'~/'
+t_SUMA = r'\+'
+t_RESTA = r'-'
+t_MULTIPLICACION = r'\*'
+t_DIVISION = r'/'
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
+
+
+def t_VARIABLE(t):
+    r'[a-zA-Z$_][a-zA-Z\d$_]*'
+    t.type = reserved.get(t.value,'VARIABLE')
+    return t
+
+
+# A regular expression rule with some action code
+def t_NUMERO(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
+#Termina parte de Danny Montenegro
+
 
 #Empiezaa parte de Miguel
 t_MAYORQUE = r'\>'
@@ -52,30 +93,12 @@ t_DOSPUNTOS = r'\:'
 #Termina parte de Miguel
 
 
-# Regular expression rules for simple tokens
-t_PLUS = r'\+'
-t_MINUS = r'-'
-t_TIMES = r'\*'
-t_DIVIDE = r'/'
-t_LPAREN = r'\('
-t_RPAREN = r'\)'
-
-#Inicio Danny Montenegro
-t_DIVISION_ENTERA = r'~/'
-t_RESIDUO = r'%'
 
 
-def t_VARIABLE(t):
-    r'[a-zA-Z$_][a-zA-Z\d$_]*'
-    t.type = reserved.get(t.value,'VARIABLE')
-    return t
 
 
-# A regular expression rule with some action code
-def t_NUMBER(t):
-    r'\d+'
-    t.value = int(t.value)
-    return t
+
+
 
 # Define a rule so we can track line numbers
 def t_newline(t):
@@ -145,8 +168,40 @@ data = '''
     bool session = true;
     x+=1;
     x-=3;
+    >
 '''
 #Termina parte de Miguel
+
+#Parte pruebas de Danny Montenegro
+#Pruebas de Operadores de comparacion
+data = '''
+    int a = 4; 
+    var b = 6; 
+    bool compare; 
+    compare = a < b;
+    compare = a > b;
+    compare= a == b;
+    compare= a != b;
+'''
+#Pruebas de Operadores aritmeticos
+data = '''
+    int a = 4; 
+    int b = 6; 
+    int c = a + b;
+    int c = a – b; 
+    int c = a * b; 
+    int c = a / b; 
+    int c = a ~/ b; 
+    int c = a % b;  
+'''
+#Pruebas de Metodo Impresion
+data = '''print("Hello World");'''
+#Pruebas de Lectura por consola
+data = '''
+import "dart:io"; 
+String str = stdin.readLineSync(); 
+'''
+#Termina parte de pruebas de Danny Montenegro
 
 # Give the lexer some input
 lexer.input(data)
