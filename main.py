@@ -25,12 +25,23 @@ reserved = {
     'true':'TRUE',
     #Termina parte de Danny Montenegro
 
+    #Parte Raul Villao
+    'do':'DO',
+    'null':'NULL',
+    'is':'IS',
+    'required':'REQUIRED',
+    'export':'EXPORT',
+    'return':'RETURN',
+    'in':'IN',
+    'super':'SUPER',
+    'final':'FINAL',
+    'this':'THIS',
+    #Termina parte Raul Villao
 }
-# List of token names.   This is always required
+
 tokens = (
     #Parte de Danny Montenegro
     'NUMERO',
-    'ASIGNACION',
     'VARIABLE',
     'SUMA',
     'RESTA',
@@ -38,7 +49,6 @@ tokens = (
     'DIVISION',
     'LPAREN',
     'RPAREN',
-    'DIVISION_ENTERA',
     #Termina parte de Danny Montenegro
     #Parte de Miguel Licea
     'MAYORQUE',
@@ -50,14 +60,25 @@ tokens = (
     'LLAVECIERRA',
     'COMA',
     'DOSPUNTOS',
-# Termina parte de Miguel
+    #Termina parte de Miguel LiceA
+    #Parte Raul
+    'IGUAL',
+    'COMILLASDOBLES',
+    'COMILLASSIMPLES',
+    'PUNTO',
+    'CORCHETEABRE',
+    'CORCHETECIERRA',
+    'IGUALQUE',
+    'DIFERENTEQUE',
+    'ASIGNACIONAUMENTADA',
+    'ASIGNACIONDISMINUIDA',
+    'FLECHA'
+    #Termina parte Raul
 )+ tuple(reserved.values())
 
 
 #Parte de Danny Montenegro
 
-t_ASIGNACION = r'\='
-t_DIVISION_ENTERA = r'~/'
 t_SUMA = r'\+'
 t_RESTA = r'-'
 t_MULTIPLICACION = r'\*'
@@ -72,7 +93,6 @@ def t_VARIABLE(t):
     return t
 
 
-# A regular expression rule with some action code
 def t_NUMERO(t):
     r'\d+'
     t.value = int(t.value)
@@ -202,6 +222,67 @@ import "dart:io";
 String str = stdin.readLineSync(); 
 '''
 #Termina parte de pruebas de Danny Montenegro
+
+#Parte Raul
+#Pruebas If
+data = '''
+if(5>1){ 
+  a = 25; 
+} else{ 
+  a = 5 
+} 
+'''
+#Pruebas While
+data = '''
+    while (x > 0) { 
+   q=q+x; 
+   x=x-1; 
+} 
+'''
+
+#Puebas de palabras reservadas agregadas recientemente
+data = '''
+    class point{
+        int x;
+        int y;   
+        Point(double x, double y) {
+          this.x = x;
+          this.y = y;
+        }
+    }     
+    do { 
+        printLine();
+        if(varible==0){
+            return variable;
+        }
+    } while (variable!=null);    
+    const Scrollbar({required int numero});    
+    export 'src/cascade.dart' show Cascade;    
+    if (employee is Person) {
+      employee.firstName = 'Bob';
+    }    
+    for (final candidate in candidates) {
+      candidate.interview();
+    }
+    super.turnOn();
+'''
+
+#Prueba funciones
+data = '''
+void saludar (String saludo){ 
+
+print (saludo+ "hola"); 
+
+}
+
+String salidar(String saludo){
+    return saludo+"hola"
+}
+
+int numero() => 4; 
+print(numero()); 
+'''
+#Termina Parte Raul
 
 # Give the lexer some input
 lexer.input(data)
