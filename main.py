@@ -13,6 +13,19 @@ reserved = {
     'String':'STRING',
     'bool':'BOOL',
     #Termina parte de Miguel
+
+    #Parte Raul
+    'do':'DO',
+    'null':'NULL',
+    'is':'IS',
+    'required':'REQUIRED',
+    'export':'EXPORT',
+    'return':'RETURN',
+    'in':'IN',
+    'super':'SUPER',
+    'final':'FINAL',
+    'this':'THIS',
+    #Termina parte Raul
 }
 # List of token names.   This is always required
 tokens = (
@@ -37,6 +50,20 @@ tokens = (
     'COMA',
     'DOSPUNTOS',
     #Termina parte de Miguel
+
+    #Parte Raul
+    'IGUAL',
+    'COMILLASDOBLES',
+    'COMILLASSIMPLES',
+    'PUNTO',
+    'CORCHETEABRE',
+    'CORCHETECIERRA',
+    'IGUALQUE',
+    'DIFERENTEQUE',
+    'ASIGNACIONAUMENTADA',
+    'ASIGNACIONDISMINUIDA',
+    'FLECHA'
+    #Termina parte Raul
 )+ tuple(reserved.values())
 
 #Empiezaa parte de Miguel
@@ -147,6 +174,68 @@ data = '''
     x-=3;
 '''
 #Termina parte de Miguel
+
+
+#Parte Raul
+#Pruebas If
+data = '''
+if(5>1){ 
+  a = 25; 
+} else{ 
+  a = 5 
+} 
+'''
+#Pruebas While
+data = '''
+    while (x > 0) { 
+   q=q+x; 
+   x=x-1; 
+} 
+'''
+
+#Puebas de palabras reservadas agregadas recientemente
+data = '''
+    class point{
+        int x;
+        int y;   
+        Point(double x, double y) {
+          this.x = x;
+          this.y = y;
+        }
+    }     
+    do { 
+        printLine();
+        if(varible==0){
+            return variable;
+        }
+    } while (variable!=null);    
+    const Scrollbar({required int numero});    
+    export 'src/cascade.dart' show Cascade;    
+    if (employee is Person) {
+      employee.firstName = 'Bob';
+    }    
+    for (final candidate in candidates) {
+      candidate.interview();
+    }
+    super.turnOn();
+'''
+
+#Prueba funciones
+data = '''
+void saludar (String saludo){ 
+
+print (saludo+ "hola"); 
+
+}
+
+String salidar(String saludo){
+    return saludo+"hola"
+}
+
+int numero() => 4; 
+print(numero()); 
+'''
+#Termina Parte Raul
 
 # Give the lexer some input
 lexer.input(data)
