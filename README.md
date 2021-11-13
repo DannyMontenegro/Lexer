@@ -16,4 +16,13 @@ void saludar (String saludo){
   print (saludo+ "hola"); 
 }
 ```
-![Lexer función](Imagenes/Lexer_funcion.png)
+![Lexer función](Imagenes/Lever_funcion.PNG)
+
+La siguiente imagen reconoce los tokens del siguiente fragmento de código:
+```
+while (x > 0) { 
+   q=q+x; 
+   x=x-1; 
+}
+```
+![Lexer función](Imagenes/Lexer_while.PNG)
