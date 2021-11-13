@@ -61,7 +61,7 @@ tokens = (
     'COMA',
     'DOSPUNTOS',
     #Termina parte de Miguel LiceA
-    #Parte Raul
+    #Parte Raul Villao
     'IGUAL',
     'COMILLASDOBLES',
     'COMILLASSIMPLES',
@@ -73,7 +73,7 @@ tokens = (
     'ASIGNACIONAUMENTADA',
     'ASIGNACIONDISMINUIDA',
     'FLECHA'
-    #Termina parte Raul
+    #Termina parte Raul Villao
 )+ tuple(reserved.values())
 
 
@@ -112,11 +112,20 @@ t_COMA = r'\,'
 t_DOSPUNTOS = r'\:'
 #Termina parte de Miguel
 
-
-
-
-
-
+#Empieza parte Raul Villao
+#Asignacion
+t_IGUAL = r'\='
+t_COMILLASDOBLES = r'"'
+t_COMILLASSIMPLES = r'\''
+t_PUNTO = r'\.'
+t_CORCHETEABRE = r'\['
+t_CORCHETECIERRA = r'\]'
+t_IGUALQUE = r'\=\='
+t_DIFERENTEQUE = r'!\='
+t_ASIGNACIONAUMENTADA = r'\+\='
+t_ASIGNACIONDISMINUIDA = r'-\='
+t_FLECHA = r'\=\>'
+#Termina parte Raul Villao
 
 
 
@@ -223,7 +232,7 @@ String str = stdin.readLineSync();
 '''
 #Termina parte de pruebas de Danny Montenegro
 
-#Parte Raul
+#Parte Raul Villao
 #Pruebas If
 data = '''
 if(5>1){ 
@@ -282,7 +291,7 @@ String salidar(String saludo){
 int numero() => 4; 
 print(numero()); 
 '''
-#Termina Parte Raul
+#Termina Parte Raul Villao
 
 # Give the lexer some input
 lexer.input(data)
