@@ -8,7 +8,7 @@ from main import tokens
 #Tipos de Datos
 #Mapas
 #Funciones(Faltan las arrow functions)
-
+#Parte de Miguel
 def p_funciones(p):
     '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
@@ -112,7 +112,7 @@ def p_empty(p):
 # Error rule for syntax errors
 def p_error(p):
     print("Syntax error in input!")
- 
+#Termia parte de Miguel
  # Build the parser
 
 parser = yacc.yacc()
