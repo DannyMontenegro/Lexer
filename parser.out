@@ -1,0 +1,1888 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ADD
+    COMILLASDOBLES
+    COMILLASSIMPLES
+    CORCHETEABRE
+    CORCHETECIERRA
+    DO
+    ELSE
+    EXPORT
+    FINAL
+    FLECHA
+    FOR
+    IF
+    IN
+    IS
+    LIST
+    NEW
+    NOT
+    NULL
+    PRINT
+    REQUIRED
+    SET
+    SUPER
+    THIS
+    WHILE
+
+Grammar
+
+Rule 0     S' -> funcion
+Rule 1     funcion -> tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
+Rule 2     funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
+Rule 3     funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
+Rule 4     parametros -> tipoDato VARIABLE
+Rule 5     parametros -> parametros COMA tipoDato VARIABLE
+Rule 6     parametros -> empty
+Rule 7     bloque -> expresion
+Rule 8     bloque -> bloque expresion
+Rule 9     bloque -> empty
+Rule 10    expresion -> mapa PUNTOCOMA
+Rule 11    expresion -> mapaFunciones PUNTOCOMA
+Rule 12    expresion -> asignacion PUNTOCOMA
+Rule 13    import -> IMPORT CADENA PUNTOCOMA
+Rule 14    asignacion -> VARIABLE operadores_asignacion valores
+Rule 15    asignacion -> tipoDato VARIABLE IGUAL valores
+Rule 16    asignacion -> VARIABLE IGUAL comparacion
+Rule 17    asignacion -> BOOL VARIABLE IGUAL comparacion
+Rule 18    asignacion -> VARIABLE operadores_asignacion operacion_aritmetica
+Rule 19    asignacion -> tipoDato VARIABLE IGUAL operacion_aritmetica
+Rule 20    operacion_aritmetica -> valores operadores_aritmeticos valores
+Rule 21    operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos valores
+Rule 22    operadores_aritmeticos -> SUMA
+Rule 23    operadores_aritmeticos -> RESTA
+Rule 24    operadores_aritmeticos -> MULTIPLICACION
+Rule 25    operadores_aritmeticos -> DIVISION
+Rule 26    operadores_aritmeticos -> DIVENTERA
+Rule 27    operadores_aritmeticos -> RESIDUO
+Rule 28    operadores_asignacion -> IGUAL
+Rule 29    operadores_asignacion -> ASIGNACIONAUMENTADA
+Rule 30    operadores_asignacion -> ASIGNACIONDISMINUIDA
+Rule 31    comparacion -> valores comparador valores
+Rule 32    comparacion -> comparacion comparador valores
+Rule 33    comparador -> MENORQUE
+Rule 34    comparador -> MAYORQUE
+Rule 35    comparador -> IGUALQUE
+Rule 36    comparador -> DIFERENTEQUE
+Rule 37    mapa -> MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa
+Rule 38    mapa -> mapaFunciones
+Rule 39    mapaFunciones -> mapa PUNTO VARIABLE LPAREN RPAREN
+Rule 40    mapaFunciones -> mapa PUNTO VARIABLE LPAREN valores
+Rule 41    mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN RPAREN
+Rule 42    mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN valores RPAREN
+Rule 43    creacionMapa -> LLAVEABRE paresClaveValor LLAVECIERRA
+Rule 44    creacionMapa -> VARIABLE
+Rule 45    paresClaveValor -> valores DOSPUNTOS valores
+Rule 46    paresClaveValor -> paresClaveValor COMA valores DOSPUNTOS valores
+Rule 47    valores -> VARIABLE
+Rule 48    valores -> NUMERO
+Rule 49    valores -> CADENA
+Rule 50    valores -> booleano
+Rule 51    booleano -> TRUE
+Rule 52    booleano -> FALSE
+Rule 53    tipoDato -> STRING
+Rule 54    tipoDato -> INT
+Rule 55    tipoDato -> BOOL
+Rule 56    tipoDato -> DOUBLE
+Rule 57    tipoDato -> DYNAMIC
+Rule 58    tipoDato -> VAR
+Rule 59    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ADD                  : 
+ASIGNACIONAUMENTADA  : 29
+ASIGNACIONDISMINUIDA : 30
+BOOL                 : 17 55
+CADENA               : 13 49
+COMA                 : 5 37 46
+COMILLASDOBLES       : 
+COMILLASSIMPLES      : 
+CORCHETEABRE         : 
+CORCHETECIERRA       : 
+DIFERENTEQUE         : 36
+DIVENTERA            : 26
+DIVISION             : 25
+DO                   : 
+DOSPUNTOS            : 45 46
+DOUBLE               : 56
+DYNAMIC              : 57
+ELSE                 : 
+EXPORT               : 
+FALSE                : 52
+FINAL                : 
+FLECHA               : 
+FOR                  : 
+IF                   : 
+IGUAL                : 15 16 17 19 28 37
+IGUALQUE             : 35
+IMPORT               : 13
+IN                   : 
+INT                  : 54
+IS                   : 
+LIST                 : 
+LLAVEABRE            : 1 2 3 43
+LLAVECIERRA          : 1 2 3 43
+LPAREN               : 1 2 3 39 40 41 42
+MAP                  : 37
+MAYORQUE             : 34 37
+MENORQUE             : 33 37
+MULTIPLICACION       : 24
+NEW                  : 
+NOT                  : 
+NULL                 : 
+NUMERO               : 48
+PRINT                : 
+PUNTO                : 39 40 41 42
+PUNTOCOMA            : 1 3 10 11 12 13
+REQUIRED             : 
+RESIDUO              : 27
+RESTA                : 23
+RETURN               : 1 3
+RPAREN               : 1 2 3 39 41 42
+SET                  : 
+STRING               : 53
+SUMA                 : 22
+SUPER                : 
+THIS                 : 
+TRUE                 : 51
+VAR                  : 58
+VARIABLE             : 1 2 3 4 5 14 15 16 17 18 19 37 39 40 41 41 42 42 44 47
+VOID                 : 2 3
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignacion           : 12
+bloque               : 1 2 3 8
+booleano             : 50
+comparacion          : 16 17 32
+comparador           : 31 32
+creacionMapa         : 37
+empty                : 6 9
+expresion            : 7 8
+funcion              : 0
+import               : 
+mapa                 : 10 39 40
+mapaFunciones        : 11 38
+operacion_aritmetica : 18 19 21
+operadores_aritmeticos : 20 21
+operadores_asignacion : 14 18
+parametros           : 1 2 3 5
+paresClaveValor      : 43 46
+tipoDato             : 1 4 5 15 19 37 37
+valores              : 1 14 15 20 20 21 31 31 32 40 42 45 45 46 46
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . funcion
+    (1) funcion -> . tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
+    (2) funcion -> . VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
+    (3) funcion -> . VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+
+    VOID            shift and go to state 3
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    BOOL            shift and go to state 6
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+
+    funcion                        shift and go to state 1
+    tipoDato                       shift and go to state 2
+
+state 1
+
+    (0) S' -> funcion .
+
+
+
+state 2
+
+    (1) funcion -> tipoDato . VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
+
+    VARIABLE        shift and go to state 10
+
+
+state 3
+
+    (2) funcion -> VOID . VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
+    (3) funcion -> VOID . VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
+
+    VARIABLE        shift and go to state 11
+
+
+state 4
+
+    (53) tipoDato -> STRING .
+
+    VARIABLE        reduce using rule 53 (tipoDato -> STRING .)
+    COMA            reduce using rule 53 (tipoDato -> STRING .)
+    MAYORQUE        reduce using rule 53 (tipoDato -> STRING .)
+
+
+state 5
+
+    (54) tipoDato -> INT .
+
+    VARIABLE        reduce using rule 54 (tipoDato -> INT .)
+    COMA            reduce using rule 54 (tipoDato -> INT .)
+    MAYORQUE        reduce using rule 54 (tipoDato -> INT .)
+
+
+state 6
+
+    (55) tipoDato -> BOOL .
+
+    VARIABLE        reduce using rule 55 (tipoDato -> BOOL .)
+    COMA            reduce using rule 55 (tipoDato -> BOOL .)
+    MAYORQUE        reduce using rule 55 (tipoDato -> BOOL .)
+
+
+state 7
+
+    (56) tipoDato -> DOUBLE .
+
+    VARIABLE        reduce using rule 56 (tipoDato -> DOUBLE .)
+    COMA            reduce using rule 56 (tipoDato -> DOUBLE .)
+    MAYORQUE        reduce using rule 56 (tipoDato -> DOUBLE .)
+
+
+state 8
+
+    (57) tipoDato -> DYNAMIC .
+
+    VARIABLE        reduce using rule 57 (tipoDato -> DYNAMIC .)
+    COMA            reduce using rule 57 (tipoDato -> DYNAMIC .)
+    MAYORQUE        reduce using rule 57 (tipoDato -> DYNAMIC .)
+
+
+state 9
+
+    (58) tipoDato -> VAR .
+
+    VARIABLE        reduce using rule 58 (tipoDato -> VAR .)
+    COMA            reduce using rule 58 (tipoDato -> VAR .)
+    MAYORQUE        reduce using rule 58 (tipoDato -> VAR .)
+
+
+state 10
+
+    (1) funcion -> tipoDato VARIABLE . LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
+
+    LPAREN          shift and go to state 12
+
+
+state 11
+
+    (2) funcion -> VOID VARIABLE . LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
+    (3) funcion -> VOID VARIABLE . LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
+
+    LPAREN          shift and go to state 13
+
+
+state 12
+
+    (1) funcion -> tipoDato VARIABLE LPAREN . parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
+    (4) parametros -> . tipoDato VARIABLE
+    (5) parametros -> . parametros COMA tipoDato VARIABLE
+    (6) parametros -> . empty
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+    (59) empty -> .
+
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    BOOL            shift and go to state 6
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+    RPAREN          reduce using rule 59 (empty -> .)
+    COMA            reduce using rule 59 (empty -> .)
+
+    tipoDato                       shift and go to state 14
+    parametros                     shift and go to state 15
+    empty                          shift and go to state 16
+
+state 13
+
+    (2) funcion -> VOID VARIABLE LPAREN . parametros RPAREN LLAVEABRE bloque LLAVECIERRA
+    (3) funcion -> VOID VARIABLE LPAREN . parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
+    (4) parametros -> . tipoDato VARIABLE
+    (5) parametros -> . parametros COMA tipoDato VARIABLE
+    (6) parametros -> . empty
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+    (59) empty -> .
+
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    BOOL            shift and go to state 6
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+    RPAREN          reduce using rule 59 (empty -> .)
+    COMA            reduce using rule 59 (empty -> .)
+
+    parametros                     shift and go to state 17
+    tipoDato                       shift and go to state 14
+    empty                          shift and go to state 16
+
+state 14
+
+    (4) parametros -> tipoDato . VARIABLE
+
+    VARIABLE        shift and go to state 18
+
+
+state 15
+
+    (1) funcion -> tipoDato VARIABLE LPAREN parametros . RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
+    (5) parametros -> parametros . COMA tipoDato VARIABLE
+
+    RPAREN          shift and go to state 19
+    COMA            shift and go to state 20
+
+
+state 16
+
+    (6) parametros -> empty .
+
+    RPAREN          reduce using rule 6 (parametros -> empty .)
+    COMA            reduce using rule 6 (parametros -> empty .)
+
+
+state 17
+
+    (2) funcion -> VOID VARIABLE LPAREN parametros . RPAREN LLAVEABRE bloque LLAVECIERRA
+    (3) funcion -> VOID VARIABLE LPAREN parametros . RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
+    (5) parametros -> parametros . COMA tipoDato VARIABLE
+
+    RPAREN          shift and go to state 21
+    COMA            shift and go to state 20
+
+
+state 18
+
+    (4) parametros -> tipoDato VARIABLE .
+
+    RPAREN          reduce using rule 4 (parametros -> tipoDato VARIABLE .)
+    COMA            reduce using rule 4 (parametros -> tipoDato VARIABLE .)
+
+
+state 19
+
+    (1) funcion -> tipoDato VARIABLE LPAREN parametros RPAREN . LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
+
+    LLAVEABRE       shift and go to state 22
+
+
+state 20
+
+    (5) parametros -> parametros COMA . tipoDato VARIABLE
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    BOOL            shift and go to state 6
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+
+    tipoDato                       shift and go to state 23
+
+state 21
+
+    (2) funcion -> VOID VARIABLE LPAREN parametros RPAREN . LLAVEABRE bloque LLAVECIERRA
+    (3) funcion -> VOID VARIABLE LPAREN parametros RPAREN . LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
+
+    LLAVEABRE       shift and go to state 24
+
+
+state 22
+
+    (1) funcion -> tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE . bloque RETURN valores PUNTOCOMA LLAVECIERRA
+    (7) bloque -> . expresion
+    (8) bloque -> . bloque expresion
+    (9) bloque -> . empty
+    (10) expresion -> . mapa PUNTOCOMA
+    (11) expresion -> . mapaFunciones PUNTOCOMA
+    (12) expresion -> . asignacion PUNTOCOMA
+    (59) empty -> .
+    (37) mapa -> . MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa
+    (38) mapa -> . mapaFunciones
+    (39) mapaFunciones -> . mapa PUNTO VARIABLE LPAREN RPAREN
+    (40) mapaFunciones -> . mapa PUNTO VARIABLE LPAREN valores
+    (41) mapaFunciones -> . VARIABLE PUNTO VARIABLE LPAREN RPAREN
+    (42) mapaFunciones -> . VARIABLE PUNTO VARIABLE LPAREN valores RPAREN
+    (14) asignacion -> . VARIABLE operadores_asignacion valores
+    (15) asignacion -> . tipoDato VARIABLE IGUAL valores
+    (16) asignacion -> . VARIABLE IGUAL comparacion
+    (17) asignacion -> . BOOL VARIABLE IGUAL comparacion
+    (18) asignacion -> . VARIABLE operadores_asignacion operacion_aritmetica
+    (19) asignacion -> . tipoDato VARIABLE IGUAL operacion_aritmetica
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+
+  ! shift/reduce conflict for MAP resolved as shift
+  ! shift/reduce conflict for VARIABLE resolved as shift
+  ! shift/reduce conflict for BOOL resolved as shift
+  ! shift/reduce conflict for STRING resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for DOUBLE resolved as shift
+  ! shift/reduce conflict for DYNAMIC resolved as shift
+  ! shift/reduce conflict for VAR resolved as shift
+    RETURN          reduce using rule 59 (empty -> .)
+    MAP             shift and go to state 33
+    VARIABLE        shift and go to state 26
+    BOOL            shift and go to state 34
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+
+  ! MAP             [ reduce using rule 59 (empty -> .) ]
+  ! VARIABLE        [ reduce using rule 59 (empty -> .) ]
+  ! BOOL            [ reduce using rule 59 (empty -> .) ]
+  ! STRING          [ reduce using rule 59 (empty -> .) ]
+  ! INT             [ reduce using rule 59 (empty -> .) ]
+  ! DOUBLE          [ reduce using rule 59 (empty -> .) ]
+  ! DYNAMIC         [ reduce using rule 59 (empty -> .) ]
+  ! VAR             [ reduce using rule 59 (empty -> .) ]
+
+    tipoDato                       shift and go to state 25
+    bloque                         shift and go to state 27
+    expresion                      shift and go to state 28
+    empty                          shift and go to state 29
+    mapa                           shift and go to state 30
+    mapaFunciones                  shift and go to state 31
+    asignacion                     shift and go to state 32
+
+state 23
+
+    (5) parametros -> parametros COMA tipoDato . VARIABLE
+
+    VARIABLE        shift and go to state 35
+
+
+state 24
+
+    (2) funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE . bloque LLAVECIERRA
+    (3) funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE . bloque RETURN PUNTOCOMA LLAVECIERRA
+    (7) bloque -> . expresion
+    (8) bloque -> . bloque expresion
+    (9) bloque -> . empty
+    (10) expresion -> . mapa PUNTOCOMA
+    (11) expresion -> . mapaFunciones PUNTOCOMA
+    (12) expresion -> . asignacion PUNTOCOMA
+    (59) empty -> .
+    (37) mapa -> . MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa
+    (38) mapa -> . mapaFunciones
+    (39) mapaFunciones -> . mapa PUNTO VARIABLE LPAREN RPAREN
+    (40) mapaFunciones -> . mapa PUNTO VARIABLE LPAREN valores
+    (41) mapaFunciones -> . VARIABLE PUNTO VARIABLE LPAREN RPAREN
+    (42) mapaFunciones -> . VARIABLE PUNTO VARIABLE LPAREN valores RPAREN
+    (14) asignacion -> . VARIABLE operadores_asignacion valores
+    (15) asignacion -> . tipoDato VARIABLE IGUAL valores
+    (16) asignacion -> . VARIABLE IGUAL comparacion
+    (17) asignacion -> . BOOL VARIABLE IGUAL comparacion
+    (18) asignacion -> . VARIABLE operadores_asignacion operacion_aritmetica
+    (19) asignacion -> . tipoDato VARIABLE IGUAL operacion_aritmetica
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+
+  ! shift/reduce conflict for MAP resolved as shift
+  ! shift/reduce conflict for VARIABLE resolved as shift
+  ! shift/reduce conflict for BOOL resolved as shift
+  ! shift/reduce conflict for STRING resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for DOUBLE resolved as shift
+  ! shift/reduce conflict for DYNAMIC resolved as shift
+  ! shift/reduce conflict for VAR resolved as shift
+    LLAVECIERRA     reduce using rule 59 (empty -> .)
+    RETURN          reduce using rule 59 (empty -> .)
+    MAP             shift and go to state 33
+    VARIABLE        shift and go to state 26
+    BOOL            shift and go to state 34
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+
+  ! MAP             [ reduce using rule 59 (empty -> .) ]
+  ! VARIABLE        [ reduce using rule 59 (empty -> .) ]
+  ! BOOL            [ reduce using rule 59 (empty -> .) ]
+  ! STRING          [ reduce using rule 59 (empty -> .) ]
+  ! INT             [ reduce using rule 59 (empty -> .) ]
+  ! DOUBLE          [ reduce using rule 59 (empty -> .) ]
+  ! DYNAMIC         [ reduce using rule 59 (empty -> .) ]
+  ! VAR             [ reduce using rule 59 (empty -> .) ]
+
+    bloque                         shift and go to state 36
+    expresion                      shift and go to state 28
+    empty                          shift and go to state 29
+    mapa                           shift and go to state 30
+    mapaFunciones                  shift and go to state 31
+    asignacion                     shift and go to state 32
+    tipoDato                       shift and go to state 25
+
+state 25
+
+    (15) asignacion -> tipoDato . VARIABLE IGUAL valores
+    (19) asignacion -> tipoDato . VARIABLE IGUAL operacion_aritmetica
+
+    VARIABLE        shift and go to state 37
+
+
+state 26
+
+    (41) mapaFunciones -> VARIABLE . PUNTO VARIABLE LPAREN RPAREN
+    (42) mapaFunciones -> VARIABLE . PUNTO VARIABLE LPAREN valores RPAREN
+    (14) asignacion -> VARIABLE . operadores_asignacion valores
+    (16) asignacion -> VARIABLE . IGUAL comparacion
+    (18) asignacion -> VARIABLE . operadores_asignacion operacion_aritmetica
+    (28) operadores_asignacion -> . IGUAL
+    (29) operadores_asignacion -> . ASIGNACIONAUMENTADA
+    (30) operadores_asignacion -> . ASIGNACIONDISMINUIDA
+
+    PUNTO           shift and go to state 38
+    IGUAL           shift and go to state 40
+    ASIGNACIONAUMENTADA shift and go to state 41
+    ASIGNACIONDISMINUIDA shift and go to state 42
+
+    operadores_asignacion          shift and go to state 39
+
+state 27
+
+    (1) funcion -> tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque . RETURN valores PUNTOCOMA LLAVECIERRA
+    (8) bloque -> bloque . expresion
+    (10) expresion -> . mapa PUNTOCOMA
+    (11) expresion -> . mapaFunciones PUNTOCOMA
+    (12) expresion -> . asignacion PUNTOCOMA
+    (37) mapa -> . MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa
+    (38) mapa -> . mapaFunciones
+    (39) mapaFunciones -> . mapa PUNTO VARIABLE LPAREN RPAREN
+    (40) mapaFunciones -> . mapa PUNTO VARIABLE LPAREN valores
+    (41) mapaFunciones -> . VARIABLE PUNTO VARIABLE LPAREN RPAREN
+    (42) mapaFunciones -> . VARIABLE PUNTO VARIABLE LPAREN valores RPAREN
+    (14) asignacion -> . VARIABLE operadores_asignacion valores
+    (15) asignacion -> . tipoDato VARIABLE IGUAL valores
+    (16) asignacion -> . VARIABLE IGUAL comparacion
+    (17) asignacion -> . BOOL VARIABLE IGUAL comparacion
+    (18) asignacion -> . VARIABLE operadores_asignacion operacion_aritmetica
+    (19) asignacion -> . tipoDato VARIABLE IGUAL operacion_aritmetica
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+
+    RETURN          shift and go to state 43
+    MAP             shift and go to state 33
+    VARIABLE        shift and go to state 26
+    BOOL            shift and go to state 34
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+
+    tipoDato                       shift and go to state 25
+    expresion                      shift and go to state 44
+    mapa                           shift and go to state 30
+    mapaFunciones                  shift and go to state 31
+    asignacion                     shift and go to state 32
+
+state 28
+
+    (7) bloque -> expresion .
+
+    RETURN          reduce using rule 7 (bloque -> expresion .)
+    MAP             reduce using rule 7 (bloque -> expresion .)
+    VARIABLE        reduce using rule 7 (bloque -> expresion .)
+    BOOL            reduce using rule 7 (bloque -> expresion .)
+    STRING          reduce using rule 7 (bloque -> expresion .)
+    INT             reduce using rule 7 (bloque -> expresion .)
+    DOUBLE          reduce using rule 7 (bloque -> expresion .)
+    DYNAMIC         reduce using rule 7 (bloque -> expresion .)
+    VAR             reduce using rule 7 (bloque -> expresion .)
+    LLAVECIERRA     reduce using rule 7 (bloque -> expresion .)
+
+
+state 29
+
+    (9) bloque -> empty .
+
+    RETURN          reduce using rule 9 (bloque -> empty .)
+    MAP             reduce using rule 9 (bloque -> empty .)
+    VARIABLE        reduce using rule 9 (bloque -> empty .)
+    BOOL            reduce using rule 9 (bloque -> empty .)
+    STRING          reduce using rule 9 (bloque -> empty .)
+    INT             reduce using rule 9 (bloque -> empty .)
+    DOUBLE          reduce using rule 9 (bloque -> empty .)
+    DYNAMIC         reduce using rule 9 (bloque -> empty .)
+    VAR             reduce using rule 9 (bloque -> empty .)
+    LLAVECIERRA     reduce using rule 9 (bloque -> empty .)
+
+
+state 30
+
+    (10) expresion -> mapa . PUNTOCOMA
+    (39) mapaFunciones -> mapa . PUNTO VARIABLE LPAREN RPAREN
+    (40) mapaFunciones -> mapa . PUNTO VARIABLE LPAREN valores
+
+    PUNTOCOMA       shift and go to state 45
+    PUNTO           shift and go to state 46
+
+
+state 31
+
+    (11) expresion -> mapaFunciones . PUNTOCOMA
+    (38) mapa -> mapaFunciones .
+
+  ! shift/reduce conflict for PUNTOCOMA resolved as shift
+    PUNTOCOMA       shift and go to state 47
+    PUNTO           reduce using rule 38 (mapa -> mapaFunciones .)
+
+  ! PUNTOCOMA       [ reduce using rule 38 (mapa -> mapaFunciones .) ]
+
+
+state 32
+
+    (12) expresion -> asignacion . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 48
+
+
+state 33
+
+    (37) mapa -> MAP . MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa
+
+    MENORQUE        shift and go to state 49
+
+
+state 34
+
+    (17) asignacion -> BOOL . VARIABLE IGUAL comparacion
+    (55) tipoDato -> BOOL .
+
+  ! shift/reduce conflict for VARIABLE resolved as shift
+    VARIABLE        shift and go to state 50
+
+  ! VARIABLE        [ reduce using rule 55 (tipoDato -> BOOL .) ]
+
+
+state 35
+
+    (5) parametros -> parametros COMA tipoDato VARIABLE .
+
+    RPAREN          reduce using rule 5 (parametros -> parametros COMA tipoDato VARIABLE .)
+    COMA            reduce using rule 5 (parametros -> parametros COMA tipoDato VARIABLE .)
+
+
+state 36
+
+    (2) funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque . LLAVECIERRA
+    (3) funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque . RETURN PUNTOCOMA LLAVECIERRA
+    (8) bloque -> bloque . expresion
+    (10) expresion -> . mapa PUNTOCOMA
+    (11) expresion -> . mapaFunciones PUNTOCOMA
+    (12) expresion -> . asignacion PUNTOCOMA
+    (37) mapa -> . MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa
+    (38) mapa -> . mapaFunciones
+    (39) mapaFunciones -> . mapa PUNTO VARIABLE LPAREN RPAREN
+    (40) mapaFunciones -> . mapa PUNTO VARIABLE LPAREN valores
+    (41) mapaFunciones -> . VARIABLE PUNTO VARIABLE LPAREN RPAREN
+    (42) mapaFunciones -> . VARIABLE PUNTO VARIABLE LPAREN valores RPAREN
+    (14) asignacion -> . VARIABLE operadores_asignacion valores
+    (15) asignacion -> . tipoDato VARIABLE IGUAL valores
+    (16) asignacion -> . VARIABLE IGUAL comparacion
+    (17) asignacion -> . BOOL VARIABLE IGUAL comparacion
+    (18) asignacion -> . VARIABLE operadores_asignacion operacion_aritmetica
+    (19) asignacion -> . tipoDato VARIABLE IGUAL operacion_aritmetica
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+
+    LLAVECIERRA     shift and go to state 51
+    RETURN          shift and go to state 52
+    MAP             shift and go to state 33
+    VARIABLE        shift and go to state 26
+    BOOL            shift and go to state 34
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+
+    expresion                      shift and go to state 44
+    mapa                           shift and go to state 30
+    mapaFunciones                  shift and go to state 31
+    asignacion                     shift and go to state 32
+    tipoDato                       shift and go to state 25
+
+state 37
+
+    (15) asignacion -> tipoDato VARIABLE . IGUAL valores
+    (19) asignacion -> tipoDato VARIABLE . IGUAL operacion_aritmetica
+
+    IGUAL           shift and go to state 53
+
+
+state 38
+
+    (41) mapaFunciones -> VARIABLE PUNTO . VARIABLE LPAREN RPAREN
+    (42) mapaFunciones -> VARIABLE PUNTO . VARIABLE LPAREN valores RPAREN
+
+    VARIABLE        shift and go to state 54
+
+
+state 39
+
+    (14) asignacion -> VARIABLE operadores_asignacion . valores
+    (18) asignacion -> VARIABLE operadores_asignacion . operacion_aritmetica
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (20) operacion_aritmetica -> . valores operadores_aritmeticos valores
+    (21) operacion_aritmetica -> . operacion_aritmetica operadores_aritmeticos valores
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 56
+    operacion_aritmetica           shift and go to state 57
+    booleano                       shift and go to state 60
+
+state 40
+
+    (16) asignacion -> VARIABLE IGUAL . comparacion
+    (28) operadores_asignacion -> IGUAL .
+    (31) comparacion -> . valores comparador valores
+    (32) comparacion -> . comparacion comparador valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+  ! shift/reduce conflict for VARIABLE resolved as shift
+  ! shift/reduce conflict for NUMERO resolved as shift
+  ! shift/reduce conflict for CADENA resolved as shift
+  ! shift/reduce conflict for TRUE resolved as shift
+  ! shift/reduce conflict for FALSE resolved as shift
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+  ! VARIABLE        [ reduce using rule 28 (operadores_asignacion -> IGUAL .) ]
+  ! NUMERO          [ reduce using rule 28 (operadores_asignacion -> IGUAL .) ]
+  ! CADENA          [ reduce using rule 28 (operadores_asignacion -> IGUAL .) ]
+  ! TRUE            [ reduce using rule 28 (operadores_asignacion -> IGUAL .) ]
+  ! FALSE           [ reduce using rule 28 (operadores_asignacion -> IGUAL .) ]
+
+    comparacion                    shift and go to state 63
+    valores                        shift and go to state 64
+    booleano                       shift and go to state 60
+
+state 41
+
+    (29) operadores_asignacion -> ASIGNACIONAUMENTADA .
+
+    VARIABLE        reduce using rule 29 (operadores_asignacion -> ASIGNACIONAUMENTADA .)
+    NUMERO          reduce using rule 29 (operadores_asignacion -> ASIGNACIONAUMENTADA .)
+    CADENA          reduce using rule 29 (operadores_asignacion -> ASIGNACIONAUMENTADA .)
+    TRUE            reduce using rule 29 (operadores_asignacion -> ASIGNACIONAUMENTADA .)
+    FALSE           reduce using rule 29 (operadores_asignacion -> ASIGNACIONAUMENTADA .)
+
+
+state 42
+
+    (30) operadores_asignacion -> ASIGNACIONDISMINUIDA .
+
+    VARIABLE        reduce using rule 30 (operadores_asignacion -> ASIGNACIONDISMINUIDA .)
+    NUMERO          reduce using rule 30 (operadores_asignacion -> ASIGNACIONDISMINUIDA .)
+    CADENA          reduce using rule 30 (operadores_asignacion -> ASIGNACIONDISMINUIDA .)
+    TRUE            reduce using rule 30 (operadores_asignacion -> ASIGNACIONDISMINUIDA .)
+    FALSE           reduce using rule 30 (operadores_asignacion -> ASIGNACIONDISMINUIDA .)
+
+
+state 43
+
+    (1) funcion -> tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN . valores PUNTOCOMA LLAVECIERRA
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 65
+    booleano                       shift and go to state 60
+
+state 44
+
+    (8) bloque -> bloque expresion .
+
+    RETURN          reduce using rule 8 (bloque -> bloque expresion .)
+    MAP             reduce using rule 8 (bloque -> bloque expresion .)
+    VARIABLE        reduce using rule 8 (bloque -> bloque expresion .)
+    BOOL            reduce using rule 8 (bloque -> bloque expresion .)
+    STRING          reduce using rule 8 (bloque -> bloque expresion .)
+    INT             reduce using rule 8 (bloque -> bloque expresion .)
+    DOUBLE          reduce using rule 8 (bloque -> bloque expresion .)
+    DYNAMIC         reduce using rule 8 (bloque -> bloque expresion .)
+    VAR             reduce using rule 8 (bloque -> bloque expresion .)
+    LLAVECIERRA     reduce using rule 8 (bloque -> bloque expresion .)
+
+
+state 45
+
+    (10) expresion -> mapa PUNTOCOMA .
+
+    RETURN          reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+    MAP             reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+    VARIABLE        reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+    BOOL            reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+    STRING          reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+    INT             reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+    DOUBLE          reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+    DYNAMIC         reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+    VAR             reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+    LLAVECIERRA     reduce using rule 10 (expresion -> mapa PUNTOCOMA .)
+
+
+state 46
+
+    (39) mapaFunciones -> mapa PUNTO . VARIABLE LPAREN RPAREN
+    (40) mapaFunciones -> mapa PUNTO . VARIABLE LPAREN valores
+
+    VARIABLE        shift and go to state 66
+
+
+state 47
+
+    (11) expresion -> mapaFunciones PUNTOCOMA .
+
+    RETURN          reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+    MAP             reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+    VARIABLE        reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+    BOOL            reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+    STRING          reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+    INT             reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+    DOUBLE          reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+    DYNAMIC         reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+    VAR             reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+    LLAVECIERRA     reduce using rule 11 (expresion -> mapaFunciones PUNTOCOMA .)
+
+
+state 48
+
+    (12) expresion -> asignacion PUNTOCOMA .
+
+    RETURN          reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+    MAP             reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+    VARIABLE        reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+    BOOL            reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+    STRING          reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+    INT             reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+    DOUBLE          reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+    DYNAMIC         reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+    VAR             reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+    LLAVECIERRA     reduce using rule 12 (expresion -> asignacion PUNTOCOMA .)
+
+
+state 49
+
+    (37) mapa -> MAP MENORQUE . tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    BOOL            shift and go to state 6
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+
+    tipoDato                       shift and go to state 67
+
+state 50
+
+    (17) asignacion -> BOOL VARIABLE . IGUAL comparacion
+
+    IGUAL           shift and go to state 68
+
+
+state 51
+
+    (2) funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA .
+
+    $end            reduce using rule 2 (funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA .)
+
+
+state 52
+
+    (3) funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN . PUNTOCOMA LLAVECIERRA
+
+    PUNTOCOMA       shift and go to state 69
+
+
+state 53
+
+    (15) asignacion -> tipoDato VARIABLE IGUAL . valores
+    (19) asignacion -> tipoDato VARIABLE IGUAL . operacion_aritmetica
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (20) operacion_aritmetica -> . valores operadores_aritmeticos valores
+    (21) operacion_aritmetica -> . operacion_aritmetica operadores_aritmeticos valores
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 70
+    operacion_aritmetica           shift and go to state 71
+    booleano                       shift and go to state 60
+
+state 54
+
+    (41) mapaFunciones -> VARIABLE PUNTO VARIABLE . LPAREN RPAREN
+    (42) mapaFunciones -> VARIABLE PUNTO VARIABLE . LPAREN valores RPAREN
+
+    LPAREN          shift and go to state 72
+
+
+state 55
+
+    (47) valores -> VARIABLE .
+
+    SUMA            reduce using rule 47 (valores -> VARIABLE .)
+    RESTA           reduce using rule 47 (valores -> VARIABLE .)
+    MULTIPLICACION  reduce using rule 47 (valores -> VARIABLE .)
+    DIVISION        reduce using rule 47 (valores -> VARIABLE .)
+    DIVENTERA       reduce using rule 47 (valores -> VARIABLE .)
+    RESIDUO         reduce using rule 47 (valores -> VARIABLE .)
+    PUNTOCOMA       reduce using rule 47 (valores -> VARIABLE .)
+    MENORQUE        reduce using rule 47 (valores -> VARIABLE .)
+    MAYORQUE        reduce using rule 47 (valores -> VARIABLE .)
+    IGUALQUE        reduce using rule 47 (valores -> VARIABLE .)
+    DIFERENTEQUE    reduce using rule 47 (valores -> VARIABLE .)
+    RPAREN          reduce using rule 47 (valores -> VARIABLE .)
+    PUNTO           reduce using rule 47 (valores -> VARIABLE .)
+    DOSPUNTOS       reduce using rule 47 (valores -> VARIABLE .)
+    LLAVECIERRA     reduce using rule 47 (valores -> VARIABLE .)
+    COMA            reduce using rule 47 (valores -> VARIABLE .)
+
+
+state 56
+
+    (14) asignacion -> VARIABLE operadores_asignacion valores .
+    (20) operacion_aritmetica -> valores . operadores_aritmeticos valores
+    (22) operadores_aritmeticos -> . SUMA
+    (23) operadores_aritmeticos -> . RESTA
+    (24) operadores_aritmeticos -> . MULTIPLICACION
+    (25) operadores_aritmeticos -> . DIVISION
+    (26) operadores_aritmeticos -> . DIVENTERA
+    (27) operadores_aritmeticos -> . RESIDUO
+
+    PUNTOCOMA       reduce using rule 14 (asignacion -> VARIABLE operadores_asignacion valores .)
+    SUMA            shift and go to state 74
+    RESTA           shift and go to state 75
+    MULTIPLICACION  shift and go to state 76
+    DIVISION        shift and go to state 77
+    DIVENTERA       shift and go to state 78
+    RESIDUO         shift and go to state 79
+
+    operadores_aritmeticos         shift and go to state 73
+
+state 57
+
+    (18) asignacion -> VARIABLE operadores_asignacion operacion_aritmetica .
+    (21) operacion_aritmetica -> operacion_aritmetica . operadores_aritmeticos valores
+    (22) operadores_aritmeticos -> . SUMA
+    (23) operadores_aritmeticos -> . RESTA
+    (24) operadores_aritmeticos -> . MULTIPLICACION
+    (25) operadores_aritmeticos -> . DIVISION
+    (26) operadores_aritmeticos -> . DIVENTERA
+    (27) operadores_aritmeticos -> . RESIDUO
+
+    PUNTOCOMA       reduce using rule 18 (asignacion -> VARIABLE operadores_asignacion operacion_aritmetica .)
+    SUMA            shift and go to state 74
+    RESTA           shift and go to state 75
+    MULTIPLICACION  shift and go to state 76
+    DIVISION        shift and go to state 77
+    DIVENTERA       shift and go to state 78
+    RESIDUO         shift and go to state 79
+
+    operadores_aritmeticos         shift and go to state 80
+
+state 58
+
+    (48) valores -> NUMERO .
+
+    SUMA            reduce using rule 48 (valores -> NUMERO .)
+    RESTA           reduce using rule 48 (valores -> NUMERO .)
+    MULTIPLICACION  reduce using rule 48 (valores -> NUMERO .)
+    DIVISION        reduce using rule 48 (valores -> NUMERO .)
+    DIVENTERA       reduce using rule 48 (valores -> NUMERO .)
+    RESIDUO         reduce using rule 48 (valores -> NUMERO .)
+    PUNTOCOMA       reduce using rule 48 (valores -> NUMERO .)
+    MENORQUE        reduce using rule 48 (valores -> NUMERO .)
+    MAYORQUE        reduce using rule 48 (valores -> NUMERO .)
+    IGUALQUE        reduce using rule 48 (valores -> NUMERO .)
+    DIFERENTEQUE    reduce using rule 48 (valores -> NUMERO .)
+    RPAREN          reduce using rule 48 (valores -> NUMERO .)
+    PUNTO           reduce using rule 48 (valores -> NUMERO .)
+    DOSPUNTOS       reduce using rule 48 (valores -> NUMERO .)
+    LLAVECIERRA     reduce using rule 48 (valores -> NUMERO .)
+    COMA            reduce using rule 48 (valores -> NUMERO .)
+
+
+state 59
+
+    (49) valores -> CADENA .
+
+    SUMA            reduce using rule 49 (valores -> CADENA .)
+    RESTA           reduce using rule 49 (valores -> CADENA .)
+    MULTIPLICACION  reduce using rule 49 (valores -> CADENA .)
+    DIVISION        reduce using rule 49 (valores -> CADENA .)
+    DIVENTERA       reduce using rule 49 (valores -> CADENA .)
+    RESIDUO         reduce using rule 49 (valores -> CADENA .)
+    PUNTOCOMA       reduce using rule 49 (valores -> CADENA .)
+    MENORQUE        reduce using rule 49 (valores -> CADENA .)
+    MAYORQUE        reduce using rule 49 (valores -> CADENA .)
+    IGUALQUE        reduce using rule 49 (valores -> CADENA .)
+    DIFERENTEQUE    reduce using rule 49 (valores -> CADENA .)
+    RPAREN          reduce using rule 49 (valores -> CADENA .)
+    PUNTO           reduce using rule 49 (valores -> CADENA .)
+    DOSPUNTOS       reduce using rule 49 (valores -> CADENA .)
+    LLAVECIERRA     reduce using rule 49 (valores -> CADENA .)
+    COMA            reduce using rule 49 (valores -> CADENA .)
+
+
+state 60
+
+    (50) valores -> booleano .
+
+    SUMA            reduce using rule 50 (valores -> booleano .)
+    RESTA           reduce using rule 50 (valores -> booleano .)
+    MULTIPLICACION  reduce using rule 50 (valores -> booleano .)
+    DIVISION        reduce using rule 50 (valores -> booleano .)
+    DIVENTERA       reduce using rule 50 (valores -> booleano .)
+    RESIDUO         reduce using rule 50 (valores -> booleano .)
+    PUNTOCOMA       reduce using rule 50 (valores -> booleano .)
+    MENORQUE        reduce using rule 50 (valores -> booleano .)
+    MAYORQUE        reduce using rule 50 (valores -> booleano .)
+    IGUALQUE        reduce using rule 50 (valores -> booleano .)
+    DIFERENTEQUE    reduce using rule 50 (valores -> booleano .)
+    RPAREN          reduce using rule 50 (valores -> booleano .)
+    PUNTO           reduce using rule 50 (valores -> booleano .)
+    DOSPUNTOS       reduce using rule 50 (valores -> booleano .)
+    LLAVECIERRA     reduce using rule 50 (valores -> booleano .)
+    COMA            reduce using rule 50 (valores -> booleano .)
+
+
+state 61
+
+    (51) booleano -> TRUE .
+
+    SUMA            reduce using rule 51 (booleano -> TRUE .)
+    RESTA           reduce using rule 51 (booleano -> TRUE .)
+    MULTIPLICACION  reduce using rule 51 (booleano -> TRUE .)
+    DIVISION        reduce using rule 51 (booleano -> TRUE .)
+    DIVENTERA       reduce using rule 51 (booleano -> TRUE .)
+    RESIDUO         reduce using rule 51 (booleano -> TRUE .)
+    PUNTOCOMA       reduce using rule 51 (booleano -> TRUE .)
+    MENORQUE        reduce using rule 51 (booleano -> TRUE .)
+    MAYORQUE        reduce using rule 51 (booleano -> TRUE .)
+    IGUALQUE        reduce using rule 51 (booleano -> TRUE .)
+    DIFERENTEQUE    reduce using rule 51 (booleano -> TRUE .)
+    RPAREN          reduce using rule 51 (booleano -> TRUE .)
+    PUNTO           reduce using rule 51 (booleano -> TRUE .)
+    DOSPUNTOS       reduce using rule 51 (booleano -> TRUE .)
+    LLAVECIERRA     reduce using rule 51 (booleano -> TRUE .)
+    COMA            reduce using rule 51 (booleano -> TRUE .)
+
+
+state 62
+
+    (52) booleano -> FALSE .
+
+    SUMA            reduce using rule 52 (booleano -> FALSE .)
+    RESTA           reduce using rule 52 (booleano -> FALSE .)
+    MULTIPLICACION  reduce using rule 52 (booleano -> FALSE .)
+    DIVISION        reduce using rule 52 (booleano -> FALSE .)
+    DIVENTERA       reduce using rule 52 (booleano -> FALSE .)
+    RESIDUO         reduce using rule 52 (booleano -> FALSE .)
+    PUNTOCOMA       reduce using rule 52 (booleano -> FALSE .)
+    MENORQUE        reduce using rule 52 (booleano -> FALSE .)
+    MAYORQUE        reduce using rule 52 (booleano -> FALSE .)
+    IGUALQUE        reduce using rule 52 (booleano -> FALSE .)
+    DIFERENTEQUE    reduce using rule 52 (booleano -> FALSE .)
+    RPAREN          reduce using rule 52 (booleano -> FALSE .)
+    PUNTO           reduce using rule 52 (booleano -> FALSE .)
+    DOSPUNTOS       reduce using rule 52 (booleano -> FALSE .)
+    LLAVECIERRA     reduce using rule 52 (booleano -> FALSE .)
+    COMA            reduce using rule 52 (booleano -> FALSE .)
+
+
+state 63
+
+    (16) asignacion -> VARIABLE IGUAL comparacion .
+    (32) comparacion -> comparacion . comparador valores
+    (33) comparador -> . MENORQUE
+    (34) comparador -> . MAYORQUE
+    (35) comparador -> . IGUALQUE
+    (36) comparador -> . DIFERENTEQUE
+
+    PUNTOCOMA       reduce using rule 16 (asignacion -> VARIABLE IGUAL comparacion .)
+    MENORQUE        shift and go to state 82
+    MAYORQUE        shift and go to state 83
+    IGUALQUE        shift and go to state 84
+    DIFERENTEQUE    shift and go to state 85
+
+    comparador                     shift and go to state 81
+
+state 64
+
+    (31) comparacion -> valores . comparador valores
+    (33) comparador -> . MENORQUE
+    (34) comparador -> . MAYORQUE
+    (35) comparador -> . IGUALQUE
+    (36) comparador -> . DIFERENTEQUE
+
+    MENORQUE        shift and go to state 82
+    MAYORQUE        shift and go to state 83
+    IGUALQUE        shift and go to state 84
+    DIFERENTEQUE    shift and go to state 85
+
+    comparador                     shift and go to state 86
+
+state 65
+
+    (1) funcion -> tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores . PUNTOCOMA LLAVECIERRA
+
+    PUNTOCOMA       shift and go to state 87
+
+
+state 66
+
+    (39) mapaFunciones -> mapa PUNTO VARIABLE . LPAREN RPAREN
+    (40) mapaFunciones -> mapa PUNTO VARIABLE . LPAREN valores
+
+    LPAREN          shift and go to state 88
+
+
+state 67
+
+    (37) mapa -> MAP MENORQUE tipoDato . COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa
+
+    COMA            shift and go to state 89
+
+
+state 68
+
+    (17) asignacion -> BOOL VARIABLE IGUAL . comparacion
+    (31) comparacion -> . valores comparador valores
+    (32) comparacion -> . comparacion comparador valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    comparacion                    shift and go to state 90
+    valores                        shift and go to state 64
+    booleano                       shift and go to state 60
+
+state 69
+
+    (3) funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA . LLAVECIERRA
+
+    LLAVECIERRA     shift and go to state 91
+
+
+state 70
+
+    (15) asignacion -> tipoDato VARIABLE IGUAL valores .
+    (20) operacion_aritmetica -> valores . operadores_aritmeticos valores
+    (22) operadores_aritmeticos -> . SUMA
+    (23) operadores_aritmeticos -> . RESTA
+    (24) operadores_aritmeticos -> . MULTIPLICACION
+    (25) operadores_aritmeticos -> . DIVISION
+    (26) operadores_aritmeticos -> . DIVENTERA
+    (27) operadores_aritmeticos -> . RESIDUO
+
+    PUNTOCOMA       reduce using rule 15 (asignacion -> tipoDato VARIABLE IGUAL valores .)
+    SUMA            shift and go to state 74
+    RESTA           shift and go to state 75
+    MULTIPLICACION  shift and go to state 76
+    DIVISION        shift and go to state 77
+    DIVENTERA       shift and go to state 78
+    RESIDUO         shift and go to state 79
+
+    operadores_aritmeticos         shift and go to state 73
+
+state 71
+
+    (19) asignacion -> tipoDato VARIABLE IGUAL operacion_aritmetica .
+    (21) operacion_aritmetica -> operacion_aritmetica . operadores_aritmeticos valores
+    (22) operadores_aritmeticos -> . SUMA
+    (23) operadores_aritmeticos -> . RESTA
+    (24) operadores_aritmeticos -> . MULTIPLICACION
+    (25) operadores_aritmeticos -> . DIVISION
+    (26) operadores_aritmeticos -> . DIVENTERA
+    (27) operadores_aritmeticos -> . RESIDUO
+
+    PUNTOCOMA       reduce using rule 19 (asignacion -> tipoDato VARIABLE IGUAL operacion_aritmetica .)
+    SUMA            shift and go to state 74
+    RESTA           shift and go to state 75
+    MULTIPLICACION  shift and go to state 76
+    DIVISION        shift and go to state 77
+    DIVENTERA       shift and go to state 78
+    RESIDUO         shift and go to state 79
+
+    operadores_aritmeticos         shift and go to state 80
+
+state 72
+
+    (41) mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN . RPAREN
+    (42) mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN . valores RPAREN
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    RPAREN          shift and go to state 92
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 93
+    booleano                       shift and go to state 60
+
+state 73
+
+    (20) operacion_aritmetica -> valores operadores_aritmeticos . valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 94
+    booleano                       shift and go to state 60
+
+state 74
+
+    (22) operadores_aritmeticos -> SUMA .
+
+    VARIABLE        reduce using rule 22 (operadores_aritmeticos -> SUMA .)
+    NUMERO          reduce using rule 22 (operadores_aritmeticos -> SUMA .)
+    CADENA          reduce using rule 22 (operadores_aritmeticos -> SUMA .)
+    TRUE            reduce using rule 22 (operadores_aritmeticos -> SUMA .)
+    FALSE           reduce using rule 22 (operadores_aritmeticos -> SUMA .)
+
+
+state 75
+
+    (23) operadores_aritmeticos -> RESTA .
+
+    VARIABLE        reduce using rule 23 (operadores_aritmeticos -> RESTA .)
+    NUMERO          reduce using rule 23 (operadores_aritmeticos -> RESTA .)
+    CADENA          reduce using rule 23 (operadores_aritmeticos -> RESTA .)
+    TRUE            reduce using rule 23 (operadores_aritmeticos -> RESTA .)
+    FALSE           reduce using rule 23 (operadores_aritmeticos -> RESTA .)
+
+
+state 76
+
+    (24) operadores_aritmeticos -> MULTIPLICACION .
+
+    VARIABLE        reduce using rule 24 (operadores_aritmeticos -> MULTIPLICACION .)
+    NUMERO          reduce using rule 24 (operadores_aritmeticos -> MULTIPLICACION .)
+    CADENA          reduce using rule 24 (operadores_aritmeticos -> MULTIPLICACION .)
+    TRUE            reduce using rule 24 (operadores_aritmeticos -> MULTIPLICACION .)
+    FALSE           reduce using rule 24 (operadores_aritmeticos -> MULTIPLICACION .)
+
+
+state 77
+
+    (25) operadores_aritmeticos -> DIVISION .
+
+    VARIABLE        reduce using rule 25 (operadores_aritmeticos -> DIVISION .)
+    NUMERO          reduce using rule 25 (operadores_aritmeticos -> DIVISION .)
+    CADENA          reduce using rule 25 (operadores_aritmeticos -> DIVISION .)
+    TRUE            reduce using rule 25 (operadores_aritmeticos -> DIVISION .)
+    FALSE           reduce using rule 25 (operadores_aritmeticos -> DIVISION .)
+
+
+state 78
+
+    (26) operadores_aritmeticos -> DIVENTERA .
+
+    VARIABLE        reduce using rule 26 (operadores_aritmeticos -> DIVENTERA .)
+    NUMERO          reduce using rule 26 (operadores_aritmeticos -> DIVENTERA .)
+    CADENA          reduce using rule 26 (operadores_aritmeticos -> DIVENTERA .)
+    TRUE            reduce using rule 26 (operadores_aritmeticos -> DIVENTERA .)
+    FALSE           reduce using rule 26 (operadores_aritmeticos -> DIVENTERA .)
+
+
+state 79
+
+    (27) operadores_aritmeticos -> RESIDUO .
+
+    VARIABLE        reduce using rule 27 (operadores_aritmeticos -> RESIDUO .)
+    NUMERO          reduce using rule 27 (operadores_aritmeticos -> RESIDUO .)
+    CADENA          reduce using rule 27 (operadores_aritmeticos -> RESIDUO .)
+    TRUE            reduce using rule 27 (operadores_aritmeticos -> RESIDUO .)
+    FALSE           reduce using rule 27 (operadores_aritmeticos -> RESIDUO .)
+
+
+state 80
+
+    (21) operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos . valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 95
+    booleano                       shift and go to state 60
+
+state 81
+
+    (32) comparacion -> comparacion comparador . valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 96
+    booleano                       shift and go to state 60
+
+state 82
+
+    (33) comparador -> MENORQUE .
+
+    VARIABLE        reduce using rule 33 (comparador -> MENORQUE .)
+    NUMERO          reduce using rule 33 (comparador -> MENORQUE .)
+    CADENA          reduce using rule 33 (comparador -> MENORQUE .)
+    TRUE            reduce using rule 33 (comparador -> MENORQUE .)
+    FALSE           reduce using rule 33 (comparador -> MENORQUE .)
+
+
+state 83
+
+    (34) comparador -> MAYORQUE .
+
+    VARIABLE        reduce using rule 34 (comparador -> MAYORQUE .)
+    NUMERO          reduce using rule 34 (comparador -> MAYORQUE .)
+    CADENA          reduce using rule 34 (comparador -> MAYORQUE .)
+    TRUE            reduce using rule 34 (comparador -> MAYORQUE .)
+    FALSE           reduce using rule 34 (comparador -> MAYORQUE .)
+
+
+state 84
+
+    (35) comparador -> IGUALQUE .
+
+    VARIABLE        reduce using rule 35 (comparador -> IGUALQUE .)
+    NUMERO          reduce using rule 35 (comparador -> IGUALQUE .)
+    CADENA          reduce using rule 35 (comparador -> IGUALQUE .)
+    TRUE            reduce using rule 35 (comparador -> IGUALQUE .)
+    FALSE           reduce using rule 35 (comparador -> IGUALQUE .)
+
+
+state 85
+
+    (36) comparador -> DIFERENTEQUE .
+
+    VARIABLE        reduce using rule 36 (comparador -> DIFERENTEQUE .)
+    NUMERO          reduce using rule 36 (comparador -> DIFERENTEQUE .)
+    CADENA          reduce using rule 36 (comparador -> DIFERENTEQUE .)
+    TRUE            reduce using rule 36 (comparador -> DIFERENTEQUE .)
+    FALSE           reduce using rule 36 (comparador -> DIFERENTEQUE .)
+
+
+state 86
+
+    (31) comparacion -> valores comparador . valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 97
+    booleano                       shift and go to state 60
+
+state 87
+
+    (1) funcion -> tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA . LLAVECIERRA
+
+    LLAVECIERRA     shift and go to state 98
+
+
+state 88
+
+    (39) mapaFunciones -> mapa PUNTO VARIABLE LPAREN . RPAREN
+    (40) mapaFunciones -> mapa PUNTO VARIABLE LPAREN . valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    RPAREN          shift and go to state 99
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 100
+    booleano                       shift and go to state 60
+
+state 89
+
+    (37) mapa -> MAP MENORQUE tipoDato COMA . tipoDato MAYORQUE VARIABLE IGUAL creacionMapa
+    (53) tipoDato -> . STRING
+    (54) tipoDato -> . INT
+    (55) tipoDato -> . BOOL
+    (56) tipoDato -> . DOUBLE
+    (57) tipoDato -> . DYNAMIC
+    (58) tipoDato -> . VAR
+
+    STRING          shift and go to state 4
+    INT             shift and go to state 5
+    BOOL            shift and go to state 6
+    DOUBLE          shift and go to state 7
+    DYNAMIC         shift and go to state 8
+    VAR             shift and go to state 9
+
+    tipoDato                       shift and go to state 101
+
+state 90
+
+    (17) asignacion -> BOOL VARIABLE IGUAL comparacion .
+    (32) comparacion -> comparacion . comparador valores
+    (33) comparador -> . MENORQUE
+    (34) comparador -> . MAYORQUE
+    (35) comparador -> . IGUALQUE
+    (36) comparador -> . DIFERENTEQUE
+
+    PUNTOCOMA       reduce using rule 17 (asignacion -> BOOL VARIABLE IGUAL comparacion .)
+    MENORQUE        shift and go to state 82
+    MAYORQUE        shift and go to state 83
+    IGUALQUE        shift and go to state 84
+    DIFERENTEQUE    shift and go to state 85
+
+    comparador                     shift and go to state 81
+
+state 91
+
+    (3) funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA .
+
+    $end            reduce using rule 3 (funcion -> VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA .)
+
+
+state 92
+
+    (41) mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN RPAREN .
+
+    PUNTOCOMA       reduce using rule 41 (mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN RPAREN .)
+    PUNTO           reduce using rule 41 (mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN RPAREN .)
+
+
+state 93
+
+    (42) mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN valores . RPAREN
+
+    RPAREN          shift and go to state 102
+
+
+state 94
+
+    (20) operacion_aritmetica -> valores operadores_aritmeticos valores .
+
+    SUMA            reduce using rule 20 (operacion_aritmetica -> valores operadores_aritmeticos valores .)
+    RESTA           reduce using rule 20 (operacion_aritmetica -> valores operadores_aritmeticos valores .)
+    MULTIPLICACION  reduce using rule 20 (operacion_aritmetica -> valores operadores_aritmeticos valores .)
+    DIVISION        reduce using rule 20 (operacion_aritmetica -> valores operadores_aritmeticos valores .)
+    DIVENTERA       reduce using rule 20 (operacion_aritmetica -> valores operadores_aritmeticos valores .)
+    RESIDUO         reduce using rule 20 (operacion_aritmetica -> valores operadores_aritmeticos valores .)
+    PUNTOCOMA       reduce using rule 20 (operacion_aritmetica -> valores operadores_aritmeticos valores .)
+
+
+state 95
+
+    (21) operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos valores .
+
+    SUMA            reduce using rule 21 (operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos valores .)
+    RESTA           reduce using rule 21 (operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos valores .)
+    MULTIPLICACION  reduce using rule 21 (operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos valores .)
+    DIVISION        reduce using rule 21 (operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos valores .)
+    DIVENTERA       reduce using rule 21 (operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos valores .)
+    RESIDUO         reduce using rule 21 (operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos valores .)
+    PUNTOCOMA       reduce using rule 21 (operacion_aritmetica -> operacion_aritmetica operadores_aritmeticos valores .)
+
+
+state 96
+
+    (32) comparacion -> comparacion comparador valores .
+
+    MENORQUE        reduce using rule 32 (comparacion -> comparacion comparador valores .)
+    MAYORQUE        reduce using rule 32 (comparacion -> comparacion comparador valores .)
+    IGUALQUE        reduce using rule 32 (comparacion -> comparacion comparador valores .)
+    DIFERENTEQUE    reduce using rule 32 (comparacion -> comparacion comparador valores .)
+    PUNTOCOMA       reduce using rule 32 (comparacion -> comparacion comparador valores .)
+
+
+state 97
+
+    (31) comparacion -> valores comparador valores .
+
+    MENORQUE        reduce using rule 31 (comparacion -> valores comparador valores .)
+    MAYORQUE        reduce using rule 31 (comparacion -> valores comparador valores .)
+    IGUALQUE        reduce using rule 31 (comparacion -> valores comparador valores .)
+    DIFERENTEQUE    reduce using rule 31 (comparacion -> valores comparador valores .)
+    PUNTOCOMA       reduce using rule 31 (comparacion -> valores comparador valores .)
+
+
+state 98
+
+    (1) funcion -> tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA .
+
+    $end            reduce using rule 1 (funcion -> tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA .)
+
+
+state 99
+
+    (39) mapaFunciones -> mapa PUNTO VARIABLE LPAREN RPAREN .
+
+    PUNTOCOMA       reduce using rule 39 (mapaFunciones -> mapa PUNTO VARIABLE LPAREN RPAREN .)
+    PUNTO           reduce using rule 39 (mapaFunciones -> mapa PUNTO VARIABLE LPAREN RPAREN .)
+
+
+state 100
+
+    (40) mapaFunciones -> mapa PUNTO VARIABLE LPAREN valores .
+
+    PUNTOCOMA       reduce using rule 40 (mapaFunciones -> mapa PUNTO VARIABLE LPAREN valores .)
+    PUNTO           reduce using rule 40 (mapaFunciones -> mapa PUNTO VARIABLE LPAREN valores .)
+
+
+state 101
+
+    (37) mapa -> MAP MENORQUE tipoDato COMA tipoDato . MAYORQUE VARIABLE IGUAL creacionMapa
+
+    MAYORQUE        shift and go to state 103
+
+
+state 102
+
+    (42) mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN valores RPAREN .
+
+    PUNTOCOMA       reduce using rule 42 (mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN valores RPAREN .)
+    PUNTO           reduce using rule 42 (mapaFunciones -> VARIABLE PUNTO VARIABLE LPAREN valores RPAREN .)
+
+
+state 103
+
+    (37) mapa -> MAP MENORQUE tipoDato COMA tipoDato MAYORQUE . VARIABLE IGUAL creacionMapa
+
+    VARIABLE        shift and go to state 104
+
+
+state 104
+
+    (37) mapa -> MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE . IGUAL creacionMapa
+
+    IGUAL           shift and go to state 105
+
+
+state 105
+
+    (37) mapa -> MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL . creacionMapa
+    (43) creacionMapa -> . LLAVEABRE paresClaveValor LLAVECIERRA
+    (44) creacionMapa -> . VARIABLE
+
+    LLAVEABRE       shift and go to state 108
+    VARIABLE        shift and go to state 106
+
+    creacionMapa                   shift and go to state 107
+
+state 106
+
+    (44) creacionMapa -> VARIABLE .
+
+    PUNTOCOMA       reduce using rule 44 (creacionMapa -> VARIABLE .)
+    PUNTO           reduce using rule 44 (creacionMapa -> VARIABLE .)
+
+
+state 107
+
+    (37) mapa -> MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa .
+
+    PUNTOCOMA       reduce using rule 37 (mapa -> MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa .)
+    PUNTO           reduce using rule 37 (mapa -> MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL creacionMapa .)
+
+
+state 108
+
+    (43) creacionMapa -> LLAVEABRE . paresClaveValor LLAVECIERRA
+    (45) paresClaveValor -> . valores DOSPUNTOS valores
+    (46) paresClaveValor -> . paresClaveValor COMA valores DOSPUNTOS valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    paresClaveValor                shift and go to state 109
+    valores                        shift and go to state 110
+    booleano                       shift and go to state 60
+
+state 109
+
+    (43) creacionMapa -> LLAVEABRE paresClaveValor . LLAVECIERRA
+    (46) paresClaveValor -> paresClaveValor . COMA valores DOSPUNTOS valores
+
+    LLAVECIERRA     shift and go to state 111
+    COMA            shift and go to state 112
+
+
+state 110
+
+    (45) paresClaveValor -> valores . DOSPUNTOS valores
+
+    DOSPUNTOS       shift and go to state 113
+
+
+state 111
+
+    (43) creacionMapa -> LLAVEABRE paresClaveValor LLAVECIERRA .
+
+    PUNTOCOMA       reduce using rule 43 (creacionMapa -> LLAVEABRE paresClaveValor LLAVECIERRA .)
+    PUNTO           reduce using rule 43 (creacionMapa -> LLAVEABRE paresClaveValor LLAVECIERRA .)
+
+
+state 112
+
+    (46) paresClaveValor -> paresClaveValor COMA . valores DOSPUNTOS valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 114
+    booleano                       shift and go to state 60
+
+state 113
+
+    (45) paresClaveValor -> valores DOSPUNTOS . valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 115
+    booleano                       shift and go to state 60
+
+state 114
+
+    (46) paresClaveValor -> paresClaveValor COMA valores . DOSPUNTOS valores
+
+    DOSPUNTOS       shift and go to state 116
+
+
+state 115
+
+    (45) paresClaveValor -> valores DOSPUNTOS valores .
+
+    LLAVECIERRA     reduce using rule 45 (paresClaveValor -> valores DOSPUNTOS valores .)
+    COMA            reduce using rule 45 (paresClaveValor -> valores DOSPUNTOS valores .)
+
+
+state 116
+
+    (46) paresClaveValor -> paresClaveValor COMA valores DOSPUNTOS . valores
+    (47) valores -> . VARIABLE
+    (48) valores -> . NUMERO
+    (49) valores -> . CADENA
+    (50) valores -> . booleano
+    (51) booleano -> . TRUE
+    (52) booleano -> . FALSE
+
+    VARIABLE        shift and go to state 55
+    NUMERO          shift and go to state 58
+    CADENA          shift and go to state 59
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+
+    valores                        shift and go to state 117
+    booleano                       shift and go to state 60
+
+state 117
+
+    (46) paresClaveValor -> paresClaveValor COMA valores DOSPUNTOS valores .
+
+    LLAVECIERRA     reduce using rule 46 (paresClaveValor -> paresClaveValor COMA valores DOSPUNTOS valores .)
+    COMA            reduce using rule 46 (paresClaveValor -> paresClaveValor COMA valores DOSPUNTOS valores .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for MAP in state 22 resolved as shift
+WARNING: shift/reduce conflict for VARIABLE in state 22 resolved as shift
+WARNING: shift/reduce conflict for BOOL in state 22 resolved as shift
+WARNING: shift/reduce conflict for STRING in state 22 resolved as shift
+WARNING: shift/reduce conflict for INT in state 22 resolved as shift
+WARNING: shift/reduce conflict for DOUBLE in state 22 resolved as shift
+WARNING: shift/reduce conflict for DYNAMIC in state 22 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 22 resolved as shift
+WARNING: shift/reduce conflict for MAP in state 24 resolved as shift
+WARNING: shift/reduce conflict for VARIABLE in state 24 resolved as shift
+WARNING: shift/reduce conflict for BOOL in state 24 resolved as shift
+WARNING: shift/reduce conflict for STRING in state 24 resolved as shift
+WARNING: shift/reduce conflict for INT in state 24 resolved as shift
+WARNING: shift/reduce conflict for DOUBLE in state 24 resolved as shift
+WARNING: shift/reduce conflict for DYNAMIC in state 24 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 24 resolved as shift
+WARNING: shift/reduce conflict for PUNTOCOMA in state 31 resolved as shift
+WARNING: shift/reduce conflict for VARIABLE in state 34 resolved as shift
+WARNING: shift/reduce conflict for VARIABLE in state 40 resolved as shift
+WARNING: shift/reduce conflict for NUMERO in state 40 resolved as shift
+WARNING: shift/reduce conflict for CADENA in state 40 resolved as shift
+WARNING: shift/reduce conflict for TRUE in state 40 resolved as shift
+WARNING: shift/reduce conflict for FALSE in state 40 resolved as shift

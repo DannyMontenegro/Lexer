@@ -23,6 +23,7 @@ reserved = {
     'add':'ADD',
     'List':'LIST',
     'true':'TRUE',
+    'false':'FALSE',
     #Termina parte de Danny Montenegro
 
     #Parte Raul Villao
@@ -73,7 +74,8 @@ tokens = (
     'DIFERENTEQUE',
     'ASIGNACIONAUMENTADA',
     'ASIGNACIONDISMINUIDA',
-    'FLECHA'
+    'FLECHA',
+    'MENORQUE'
     #Termina parte Raul Villao
 )+ tuple(reserved.values())
 
@@ -86,7 +88,6 @@ t_MULTIPLICACION = r'\*'
 t_DIVISION = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-
 
 def t_CADENA(t):
     r'\".+\"'
@@ -107,6 +108,7 @@ def t_NUMERO(t):
 
 
 #Empiezaa parte de Miguel
+t_MENORQUE = r'\<'
 t_MAYORQUE = r'\>'
 t_NOT = r'!'
 t_DIVENTERA = r'\~/'
@@ -153,7 +155,6 @@ def t_error(t):
 
 # Build the lexer
 lexer = lex.lex()
-
 # Test it out
 #Parte de Miguel
 data = '''
@@ -298,13 +299,33 @@ int numero() => 4;
 print(numero()); 
 '''
 #Termina Parte Raul Villao
+data = '''
+Map<String,int> mapa = { 
+       "lenguajes":10 
+}; 
+mapa.remove("hola");
+mapa.clear();
+'''
+data = '''
++
+-
+*
+/
+~/
+%
+import
+{}
+void return
+'''
+data = '''hola = 9;'''
 
-# Give the lexer some input
-lexer.input(data)
+# # Give the lexer some input
+#lexer.input(data)
 
-# Tokenize
-while True:
-    tok = lexer.token()
-    if not tok:
-        break  # No more input
-    print(tok)
+# # # Tokenize
+# while True:
+#     tok = lexer.token()
+#     if not tok:
+#         break  # No more input
+#     print(tok)
+
