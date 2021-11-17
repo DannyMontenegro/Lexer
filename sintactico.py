@@ -9,6 +9,15 @@ from main import tokens
 #Mapas
 #Funciones(Faltan las arrow functions)
 #Parte de Miguel
+
+def p_bloque_codigo(p):
+    '''bloque : expresion
+                | bloque expresion
+                | empty
+                | estructuras'''
+####AQUI AÑADI ESTRUCTURAS PARA HACER PRUEBAS ^     <-------------
+
+
 def p_funciones(p):
     '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
@@ -19,10 +28,7 @@ def p_parametros(p):
                     | parametros COMA tipoDato VARIABLE
                     | empty'''
 
-def p_bloque_codigo(p):
-    '''bloque : expresion
-                | bloque expresion
-                | empty'''
+
 
 def p_expresion(p):
     '''expresion : mapa PUNTOCOMA
@@ -106,6 +112,34 @@ def p_tipo_dato(p):
                 | DOUBLE
                 | DYNAMIC
                 | VAR '''
+
+
+#Estructuras if, for y while
+#If
+def p_estructuras(p):
+    ''' estructuras : estructuraIf
+                    | estructuraWhile'''
+
+def p_estructuraIf(p):
+    ''' estructuraIf : IF LPAREN argumentoEstructura  RPAREN LLAVEABRE bloque LLAVECIERRA
+                    | IF LPAREN argumentoEstructura RPAREN LLAVEABRE estructuraIf LLAVECIERRA
+                    | estructuraIfElse
+    '''
+
+def p_estructuraIfElse(p):
+    '''  estructuraIfElse : estructuraIf ELSE LLAVEABRE bloque LLAVECIERRA
+                          | estructuraIf ELSE LLAVEABRE estructuraIf LLAVECIERRA
+    '''
+
+def p_estructuraWhile(p):
+    ''' estructuraWhile : WHILE LPAREN argumentoEstructura RPAREN LLAVEABRE bloque LLAVECIERRA
+    '''
+
+def p_argumentoEstructura(p):
+    ''' argumentoEstructura : VARIABLE
+                           | booleano
+                           | comparacion
+    '''
 
 def p_empty(p):
      'empty :'
