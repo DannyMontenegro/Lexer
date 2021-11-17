@@ -15,6 +15,7 @@ def p_bloque_codigo(p):
                 | bloque expresion
                 | empty
                 | estructuras
+                | bloque estructuras
                 '''
 ####AQUI AÑADI ESTRUCTURAS PARA HACER PRUEBAS ^     <-------------
 
