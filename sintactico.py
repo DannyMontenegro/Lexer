@@ -118,7 +118,8 @@ def p_tipo_dato(p):
 #If
 def p_estructuras(p):
     ''' estructuras : estructuraIf
-                    | estructuraWhile'''
+                    | estructuraWhile
+                    | estructuraFor'''
 
 def p_estructuraIf(p):
     ''' estructuraIf : IF LPAREN argumentoEstructura  RPAREN LLAVEABRE bloque LLAVECIERRA
@@ -134,6 +135,26 @@ def p_estructuraIfElse(p):
 def p_estructuraWhile(p):
     ''' estructuraWhile : WHILE LPAREN argumentoEstructura RPAREN LLAVEABRE bloque LLAVECIERRA
     '''
+
+
+def p_estructuraFor(p):
+    ''' estructuraFor : FOR LPAREN asignacionVacio PUNTOCOMA comparacionVacio  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
+
+def p_asignacionVacio(p):
+    ''' asignacionVacio : asignacion
+                       | empty'''
+
+def p_comparacionVacio(p):
+    ''' comparacionVacio : comparacion
+                         | booleano
+                         | empty'''
+
+
+def p_aumento(p):
+    ''' aumento : VARIABLE IGUAL operacion_aritmetica
+                | VARIABLE operadores_asignacion NUMERO
+                | VARIABLE operadores_asignacion VARIABLE
+                | empty '''
 
 def p_argumentoEstructura(p):
     ''' argumentoEstructura : VARIABLE
