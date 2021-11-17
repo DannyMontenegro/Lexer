@@ -14,7 +14,8 @@ def p_bloque_codigo(p):
     '''bloque : expresion
                 | bloque expresion
                 | empty
-                | estructuras'''
+                | estructuras
+                '''
 ####AQUI AÑADI ESTRUCTURAS PARA HACER PRUEBAS ^     <-------------
 
 
@@ -41,11 +42,11 @@ def p_import(p):
 def p_asignacion(p):
     '''asignacion : VARIABLE operadores_asignacion valores
                      | tipoDato VARIABLE IGUAL valores
-                     | VARIABLE IGUAL comparacion
                      | BOOL VARIABLE IGUAL comparacion
-                     | VARIABLE operadores_asignacion operacion_aritmetica
                      | tipoDato VARIABLE IGUAL operacion_aritmetica
                      | empty'''
+
+#EN ^ ESTA REGLAS ELIMINÉ LO SIGUIENTE PORQUE DABA PROBLEMAS: VARIABLE IGUAL comparacion , VARIABLE operadores_asignacion operacion_aritmetica
 
 def p_operacion_aritmetica(p):
     '''operacion_aritmetica : valores operadores_aritmeticos valores
@@ -63,8 +64,8 @@ def p_operadores_aritmeticos(p):
 
 def p_operadores_asignacion(p):
     '''operadores_asignacion : IGUAL
-                                | ASIGNACIONAUMENTADA
-                                | ASIGNACIONDISMINUIDA'''
+                             | ASIGNACIONAUMENTADA
+                             | ASIGNACIONDISMINUIDA'''
 
 def p_comparacion(p):
     '''comparacion : valores comparador valores
@@ -97,9 +98,9 @@ def p_pares_clave_valor(p):
 
 def p_valores(p):
     '''valores : VARIABLE
-                    | NUMERO
-                    | CADENA
-                    | booleano '''
+                | NUMERO
+                | CADENA
+                | booleano '''
 
 def p_booleano(p):
     '''booleano : TRUE
