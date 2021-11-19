@@ -1,0 +1,19 @@
+Trabajo terminado
+> tipoDato : Tipos de datos 
+> booleano : Valores true y false
+> comparador : Simbolos para comparar 
+> valores : valores numericos,cadena,booleano y variable
+> operadores_asignacion : =,+=,-=
+> operadores_aritmeticos : Operadores para operaciones aritmeticas
+> operacion_aritmetica : Operaciones
+
+
+#Estructura de Dato Mapa
+> paresClaveValor : par clave valor o conjunto de ellos
+> creacionMapa : Valor de un mapa o entre llaves o una variable
+> mapa : Instanciacion de un mapa
+> mapaFunciones : Funciones de la estructura mapa
+
+
+
+Notas>
