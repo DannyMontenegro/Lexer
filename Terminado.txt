@@ -6,6 +6,15 @@ Trabajo terminado
 > operadores_asignacion : =,+=,-=
 > operadores_aritmeticos : Operadores para operaciones aritmeticas
 > operacion_aritmetica : Operaciones
+> asignacion : Darle valor a una variable
+> import : Importar libreria
+> funcion : Definicion de funciones
+> parametros : Parametros para las funciones
+> expresion : Una sentencia terminada con punto y coma 
+> bloque : Conjunto de sentencias
+> estructuraIf : if 
+> estructuraIfElse : if else 
+> estructura While : while 
 
 
 #Estructura de Dato Mapa

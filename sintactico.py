@@ -18,35 +18,71 @@ from main import tokens
 #                 | bloque estructuras
 #                 '''
 # ####AQUI AÑADI ESTRUCTURAS PARA HACER PRUEBAS ^     <-------------
+    
+def p_funciones(p):
+    '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE       bloque RETURN valores PUNTOCOMA LLAVECIERRA
+                | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
+                | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA'''
 
+def p_estructuras(p):
+    ''' estructuras : estructuraFor
+                    | estructuraWhile
+                    | estructuraIf'''
 
-# def p_funciones(p):
-#     '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN valores PUNTOCOMA LLAVECIERRA
-#                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
-#                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA'''
+def p_estructuraFor(p):
+    ''' estructuraFor : FOR LPAREN asignacion PUNTOCOMA comparacion  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA
+    | estructuraWhile'''
 
-# def p_parametros(p):
-#     '''parametros : tipoDato VARIABLE
-#                     | parametros COMA tipoDato VARIABLE
-#                     | empty'''
+def p_aumento(p):
+    ''' aumento : VARIABLE IGUAL operacion_aritmetica
+                | VARIABLE operadores_asignacion valores'''
 
+def p_estructuraWhile(p):
+    ''' estructuraWhile : WHILE LPAREN argumentoEstructura RPAREN LLAVEABRE bloque LLAVECIERRA
+    '''
 
+def p_estructuraIf(p):
+    ''' estructuraIf : IF LPAREN argumentoEstructura  RPAREN LLAVEABRE bloque LLAVECIERRA
+                    | estructuraIfElse'''
 
-# def p_expresion(p):
-#     '''expresion : mapa PUNTOCOMA
-#                 | mapaFunciones PUNTOCOMA
-#                 | asignacion PUNTOCOMA'''
+def p_estructuraIfElse(p):
+    '''  estructuraIfElse : estructuraIf ELSE LLAVEABRE bloque LLAVECIERRA'''
 
-# def p_import(p):
-#     '''import : IMPORT CADENA PUNTOCOMA'''
+def p_argumentoEstructura(p):
+    ''' argumentoEstructura : VARIABLE
+                           | booleano
+                           | comparacion'''
+
+def p_bloque(p):
+    '''bloque : expresiones
+                | bloque expresiones'''
+
+def p_expresiones(p):
+    '''expresiones : asignacion PUNTOCOMA
+                | mapa PUNTOCOMA
+                | mapaFunciones PUNTOCOMA'''
+
+def p_parametros(p):
+    '''parametros : parametros COMA tipoDato VARIABLE
+                    | tipoDato VARIABLE
+                    | empty'''
+
+def p_import(p):
+    '''import : IMPORT CADENA PUNTOCOMA'''
 
 def p_asignacion(p):
-    '''asignacion : VARIABLE operadores_asignacion valores
+    '''asignacion : VARIABLE IGUAL valores
                      | tipoDato VARIABLE IGUAL valores
+                     | VARIABLE IGUAL comparacion
                      | BOOL VARIABLE IGUAL comparacion
-                     | tipoDato VARIABLE IGUAL operacion_aritmetica'''
+                     | tipoDato VARIABLE IGUAL operacion_aritmetica
+                     | VARIABLE IGUAL operacion_aritmetica
+                     '''
 
-#EN ^ ESTA REGLAS ELIMINÉ LO SIGUIENTE PORQUE DABA PROBLEMAS: VARIABLE IGUAL comparacion , VARIABLE operadores_asignacion operacion_aritmetica
+def p_operadores_asignacion(p):
+    '''operadores_asignacion : IGUAL
+                             | ASIGNACIONAUMENTADA
+                             | ASIGNACIONDISMINUIDA'''
 
 def p_operacion_aritmetica(p):
     '''operacion_aritmetica : valores operadores_aritmeticos valores
@@ -61,10 +97,7 @@ def p_operadores_aritmeticos(p):
                                 | DIVENTERA
                                 | RESIDUO'''
 
-def p_operadores_asignacion(p):
-    '''operadores_asignacion : IGUAL
-                             | ASIGNACIONAUMENTADA
-                             | ASIGNACIONDISMINUIDA'''
+
 
 def p_comparacion(p):
     '''comparacion : valores comparador valores
@@ -118,24 +151,11 @@ def p_tipo_dato(p):
 #                     | estructuraWhile
 #                     | estructuraFor'''
 
-# def p_estructuraIf(p):
-#     ''' estructuraIf : IF LPAREN argumentoEstructura  RPAREN LLAVEABRE bloque LLAVECIERRA
-#                     | IF LPAREN argumentoEstructura RPAREN LLAVEABRE estructuraIf LLAVECIERRA
-#                     | estructuraIfElse
-#     '''
-
-# def p_estructuraIfElse(p):
-#     '''  estructuraIfElse : estructuraIf ELSE LLAVEABRE bloque LLAVECIERRA
-#                           | estructuraIf ELSE LLAVEABRE estructuraIf LLAVECIERRA
-#     '''
-
-# def p_estructuraWhile(p):
-#     ''' estructuraWhile : WHILE LPAREN argumentoEstructura RPAREN LLAVEABRE bloque LLAVECIERRA
-#     '''
 
 
-# def p_estructuraFor(p):
-#     ''' estructuraFor : FOR LPAREN asignacion PUNTOCOMA comparacion  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
+
+
+
 
 # def p_asignacionVacio(p):
 #     ''' asignacionVacio : asignacion
@@ -146,19 +166,12 @@ def p_tipo_dato(p):
 #                          | booleano'''
 
 
-# def p_aumento(p):
-#     ''' aumento : VARIABLE IGUAL operacion_aritmetica
-#                 | VARIABLE operadores_asignacion NUMERO
-#                 | VARIABLE operadores_asignacion VARIABLE'''
 
-# def p_argumentoEstructura(p):
-#     ''' argumentoEstructura : VARIABLE
-#                            | booleano
-#                            | comparacion
-#     '''
 
-# def p_empty(p):
-#      'empty :'
+
+
+def p_empty(p):
+     'empty :'
 # Error rule for syntax errors
 def p_error(p):
     print("Syntax error in input!")
