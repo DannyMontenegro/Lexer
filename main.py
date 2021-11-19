@@ -75,7 +75,8 @@ tokens = (
     'ASIGNACIONAUMENTADA',
     'ASIGNACIONDISMINUIDA',
     'FLECHA',
-    'MENORQUE'
+    'MENORQUE',
+    'RUTA'
     #Termina parte Raul Villao
 )+ tuple(reserved.values())
 

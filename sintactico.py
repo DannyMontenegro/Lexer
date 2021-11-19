@@ -27,6 +27,7 @@ def p_funciones(p):
 
 def p_parametros(p):
     '''parametros : tipoDato VARIABLE
+                    | REQUIRED tipoDato VARIABLE
                     | parametros COMA tipoDato VARIABLE
                     | empty'''
 
@@ -35,10 +36,15 @@ def p_parametros(p):
 def p_expresion(p):
     '''expresion : mapa PUNTOCOMA
                 | mapaFunciones PUNTOCOMA
-                | asignacion PUNTOCOMA'''
+                | asignacion PUNTOCOMA
+                | import
+                | export'''
 
 def p_import(p):
     '''import : IMPORT CADENA PUNTOCOMA'''
+
+def p_export(p):
+    ''' export : EXPORT CADENA PUNTOCOMA'''
 
 def p_asignacion(p):
     '''asignacion : VARIABLE operadores_asignacion valores
@@ -70,7 +76,8 @@ def p_operadores_asignacion(p):
 
 def p_comparacion(p):
     '''comparacion : valores comparador valores
-                    | comparacion comparador valores '''
+                    | comparacion comparador valores
+                    | valores IS tipoDato'''
 
 def p_comparador(p):
     '''comparador : MENORQUE
@@ -101,7 +108,8 @@ def p_valores(p):
     '''valores : VARIABLE
                 | NUMERO
                 | CADENA
-                | booleano '''
+                | booleano
+                '''
 
 def p_booleano(p):
     '''booleano : TRUE
@@ -113,7 +121,9 @@ def p_tipo_dato(p):
                 | BOOL
                 | DOUBLE
                 | DYNAMIC
-                | VAR '''
+                | VAR
+                | nulValue
+                '''
 
 
 #Estructuras if, for y while
@@ -121,7 +131,8 @@ def p_tipo_dato(p):
 def p_estructuras(p):
     ''' estructuras : estructuraIf
                     | estructuraWhile
-                    | estructuraFor'''
+                    | estructuraFor
+                    | doWhile'''
 
 def p_estructuraIf(p):
     ''' estructuraIf : IF LPAREN argumentoEstructura  RPAREN LLAVEABRE bloque LLAVECIERRA
@@ -166,6 +177,13 @@ def p_argumentoEstructura(p):
 
 def p_empty(p):
      'empty :'
+
+def p_nulValue(p):
+    'nulValue : NULL'
+
+def p_doWhile(p):
+    ''' doWhile : DO LLAVEABRE bloque LLAVECIERRA WHILE LPAREN argumentoEstructura RPAREN'''
+
 # Error rule for syntax errors
 def p_error(p):
     print("Syntax error in input!")
