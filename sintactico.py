@@ -57,12 +57,17 @@ def p_bloque(p):
 def p_expresiones(p):
     '''expresiones : asignacion PUNTOCOMA
                 | mapa PUNTOCOMA
-                | mapaFunciones PUNTOCOMA'''
+                | mapaFunciones PUNTOCOMA
+                | setFunciones PUNTOCOMA
+                | print
+                | readPant
+                | set'''
 
 
 def p_expresion(p):
     '''expresion : mapa PUNTOCOMA
                 | mapaFunciones PUNTOCOMA
+                | setFunciones PUNTOCOMA
                 | asignacion PUNTOCOMA
                 | import
                 | export'''
@@ -121,6 +126,23 @@ def p_comparador(p):
                     | IGUALQUE
                     | DIFERENTEQUE'''
 
+def p_set(p):
+    ''' set : SET MENORQUE tipoDato MAYORQUE VARIABLE IGUAL creacionSet
+            | VAR VARIABLE IGUAL creacionSet
+            | SET MENORQUE tipoDato MAYORQUE VARIABLE IGUAL LLAVEABRE collecionObjetos LLAVECIERRA'''
+
+def p_coleccionObj(p):
+    ''' collecionObjetos : valores
+                         | valores COMA collecionObjetos
+                         | empty
+                         '''
+def p_creacionSet(p):
+    ''' creacionSet : SET LPAREN RPAREN'''
+
+def p_setFunciones(p):
+    ''' setFunciones : VARIABLE PUNTO ADD LPAREN valores RPAREN
+                     | VARIABLE PUNTO JOIN LPAREN CADENA RPAREN'''
+
 
 def p_mapa(p):
     '''mapa : MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL      creacionMapa'''
@@ -163,6 +185,12 @@ def p_empty(p):
 
 def p_nullValue(p):
     'nulValue : NULL'
+
+def p_print(p):
+    ''' print : PRINT LPAREN valores RPAREN'''
+
+def p_readPant(p):
+    ''' readPant : STRING VARIABLE IGUAL STDIN PUNTO READLINE LPAREN RPAREN PUNTOCOMA'''
 
 # Error rule for syntax errors
 def p_error(p):

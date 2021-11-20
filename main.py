@@ -37,6 +37,9 @@ reserved = {
     'super':'SUPER',
     'final':'FINAL',
     'this':'THIS',
+    'stdin':'STDIN',
+    'readLineSync':'READLINE',
+    'join':'JOIN'
     #Termina parte Raul Villao
 }
 
