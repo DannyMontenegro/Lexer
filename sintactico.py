@@ -177,7 +177,8 @@ def p_valores(p):
     '''valores : NUMERO
                 | CADENA
                 | booleano
-                | VARIABLE 
+                | VARIABLE
+                | llamadaFunciones
                 '''
 
 def p_booleano(p):
