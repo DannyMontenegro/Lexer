@@ -8,11 +8,11 @@ from main import tokens
 #                 | estructuras
 #                 | bloque estructuras
 #                 '''
-# ####AQUI AÑADI ESTRUCTURAS PARA HACER PRUEBAS ^     <-------------
+
 
 def p_estructuraWhile(p):
     ''' estructuraWhile : WHILE LPAREN argumentoEstructura RPAREN LLAVEABRE bloque LLAVECIERRA
-                        | estructuraFor'''
+                        | funcionFlecha'''
 
 def p_estructuraFor(p):
     ''' estructuraFor : FOR LPAREN asignacion PUNTOCOMA comparacion  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
@@ -21,7 +21,21 @@ def p_funciones(p):
     '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE       bloque RETURN valores PUNTOCOMA LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA'''
+def p_funcionFlecha(p):
+    ''' funcionFlecha : tipoDato VARIABLE LPAREN parametros RPAREN FLECHA llamadaFunciones'''
 
+def p_llamadaFunciones(p):
+    ''' llamadaFunciones : VARIABLE PUNTO VARIABLE LPAREN parametrosLlamada RPAREN PUNTOCOMA
+                         | VARIABLE LPAREN parametrosLlamada RPAREN PUNTOCOMA'''
+
+def p_parametrosLlamada(p):
+    ''' parametrosLlamada : parametrosFuncion
+                          | empty'''
+
+def p_parametrosFuncion(p):
+    ''' parametrosFuncion : valores
+                          | parametrosFuncion COMA valores
+                          '''
 def p_parametros(p):
     '''parametros : tipoDato VARIABLE
                     | REQUIRED tipoDato VARIABLE
