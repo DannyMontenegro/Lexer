@@ -12,7 +12,7 @@ from main import tokens
 
 def p_estructuraWhile(p):
     ''' estructuraWhile : WHILE LPAREN argumentoEstructura RPAREN LLAVEABRE bloque LLAVECIERRA
-                        | funcionFlecha'''
+                        | list'''
 
 def p_estructuraFor(p):
     ''' estructuraFor : FOR LPAREN asignacion PUNTOCOMA comparacion  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
@@ -22,11 +22,11 @@ def p_funciones(p):
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA'''
 def p_funcionFlecha(p):
-    ''' funcionFlecha : tipoDato VARIABLE LPAREN parametros RPAREN FLECHA llamadaFunciones'''
+    ''' funcionFlecha : tipoDato VARIABLE LPAREN parametros RPAREN FLECHA expresiones'''
 
 def p_llamadaFunciones(p):
-    ''' llamadaFunciones : VARIABLE PUNTO VARIABLE LPAREN parametrosLlamada RPAREN PUNTOCOMA
-                         | VARIABLE LPAREN parametrosLlamada RPAREN PUNTOCOMA'''
+    ''' llamadaFunciones : VARIABLE PUNTO VARIABLE LPAREN parametrosLlamada RPAREN
+                         | VARIABLE LPAREN parametrosLlamada RPAREN '''
 
 def p_parametrosLlamada(p):
     ''' parametrosLlamada : parametrosFuncion
@@ -144,6 +144,9 @@ def p_set(p):
     ''' set : SET MENORQUE tipoDato MAYORQUE VARIABLE IGUAL creacionSet
             | VAR VARIABLE IGUAL creacionSet
             | SET MENORQUE tipoDato MAYORQUE VARIABLE IGUAL LLAVEABRE collecionObjetos LLAVECIERRA'''
+def p_list(p):
+    ''' list : LIST MENORQUE tipoDato MAYORQUE VARIABLE IGUAL CORCHETEABRE collecionObjetos CORCHETECIERRA
+             | LIST MENORQUE tipoDato MAYORQUE VARIABLE IGUAL LIST PUNTO VARIABLE LPAREN NUMERO COMA valores RPAREN '''
 
 def p_coleccionObj(p):
     ''' collecionObjetos : valores
