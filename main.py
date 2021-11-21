@@ -24,6 +24,7 @@ reserved = {
     'List':'LIST',
     'true':'TRUE',
     'false':'FALSE',
+    'main':'MAIN',
     #Termina parte de Danny Montenegro
 
     #Parte Raul Villao

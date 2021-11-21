@@ -8,21 +8,52 @@ from main import tokens
 #                 | estructuras
 #                 | bloque estructuras
 #                 '''
+def p_dart(p):
+    ''' dart : import funcion main'''
 
+def p_main(p):
+    ''' main : VOID MAIN LPAREN RPAREN LLAVEABRE bloque LLAVECIERRA'''
+
+def p_bloque(p):
+    ''' bloque : expresion
+               | bloque expresion
+               | empty'''
+
+def p_expresion(p):
+    '''expresion : estructurasDato PUNTOCOMA
+                | estructurasFunciones PUNTOCOMA
+                | asignacion PUNTOCOMA
+                | llamadaFunciones PUNTOCOMA
+                | estructurasControl
+                | entradaSalidaDatos PUNTOCOMA
+                | funcionFlecha PUNTOCOMA'''
+
+def p_entradaSalidaDatos(p):
+    ''' entradaSalidaDatos : print
+                           | readPant'''
 
 def p_estructuraWhile(p):
     ''' estructuraWhile : WHILE LPAREN argumentoEstructura RPAREN LLAVEABRE bloque LLAVECIERRA
-                        | list'''
+                        '''
 
 def p_estructuraFor(p):
     ''' estructuraFor : FOR LPAREN asignacion PUNTOCOMA comparacion  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
 
 def p_funciones(p):
-    '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE       bloque RETURN valores PUNTOCOMA LLAVECIERRA
+    '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE  bloque RETURN valoresRetorno LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
-                | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA'''
+                | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
+                | empty'''
+
+def p_valoresRetorno(p):
+    ''' valoresRetorno : valores
+                       | VARIABLE IGUAL valores
+                       | VARIABLE operadores_asignacion NUMERO
+                       | VARIABLE IGUAL operacion_aritmetica
+                       | operacion_aritmetica'''
+
 def p_funcionFlecha(p):
-    ''' funcionFlecha : tipoDato VARIABLE LPAREN parametros RPAREN FLECHA expresiones'''
+    ''' funcionFlecha : tipoDato VARIABLE LPAREN parametros RPAREN FLECHA expresion'''
 
 def p_llamadaFunciones(p):
     ''' llamadaFunciones : VARIABLE PUNTO VARIABLE LPAREN parametrosLlamada RPAREN
@@ -36,16 +67,17 @@ def p_parametrosFuncion(p):
     ''' parametrosFuncion : valores
                           | parametrosFuncion COMA valores
                           '''
-def p_parametros(p):
-    '''parametros : tipoDato VARIABLE
-                    | REQUIRED tipoDato VARIABLE
-                    | parametros COMA tipoDato VARIABLE
-                    | empty'''
+#def p_parametros(p):
+#    '''parametros : tipoDato VARIABLE
+#                    | REQUIRED tipoDato VARIABLE
+#                    | parametros COMA tipoDato VARIABLE
+#                    | empty'''
 
-def p_estructuras(p):
-    ''' estructuras : estructuraFor
+def p_estructurasControl(p):
+    ''' estructurasControl : estructuraFor
                     | estructuraWhile
-                    | estructuraIf'''
+                    | estructuraIf
+                    | estructuraIfElse'''
 
 def p_aumento(p):
     ''' aumento : VARIABLE IGUAL operacion_aritmetica
@@ -63,28 +95,10 @@ def p_argumentoEstructura(p):
                            | booleano
                            | comparacion'''
 
-def p_bloque(p):
-    '''bloque : expresiones
-                | bloque expresiones
-                | empty'''
-
-def p_expresiones(p):
-    '''expresiones : asignacion PUNTOCOMA
-                | mapa PUNTOCOMA
-                | mapaFunciones PUNTOCOMA
-                | setFunciones PUNTOCOMA
-                | print
-                | readPant
-                | set'''
-
-
-def p_expresion(p):
-    '''expresion : mapa PUNTOCOMA
-                | mapaFunciones PUNTOCOMA
-                | setFunciones PUNTOCOMA
-                | asignacion PUNTOCOMA
-                | import
-                | export'''
+def p_estructurasDato(p):
+    ''' estructurasDato : mapa
+                       | set
+                       | list'''
 
 def p_parametros(p):
     '''parametros : parametros COMA tipoDato VARIABLE
@@ -93,7 +107,9 @@ def p_parametros(p):
 
 
 def p_import(p):
-    '''import : IMPORT CADENA PUNTOCOMA'''
+    '''import : IMPORT CADENA PUNTOCOMA
+              | import IMPORT CADENA PUNTOCOMA
+              | empty'''
 
 def p_export(p):
     ''' export : EXPORT CADENA PUNTOCOMA'''
@@ -156,21 +172,19 @@ def p_coleccionObj(p):
 def p_creacionSet(p):
     ''' creacionSet : SET LPAREN RPAREN'''
 
-def p_setFunciones(p):
-    ''' setFunciones : VARIABLE PUNTO ADD LPAREN valores RPAREN
-                     | VARIABLE PUNTO JOIN LPAREN CADENA RPAREN'''
+def p_estructurasFunciones(p):
+    ''' estructurasFunciones : VARIABLE PUNTO ADD LPAREN valores RPAREN
+                            | VARIABLE PUNTO JOIN LPAREN CADENA RPAREN'''
 
 
 def p_mapa(p):
-    '''mapa : MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL      creacionMapa'''
+    '''mapa : MAP MENORQUE tipoDato COMA tipoDato MAYORQUE VARIABLE IGUAL  creacionMapa'''
 
-def p_mapa_funciones(p):
-    '''mapaFunciones : VARIABLE PUNTO VARIABLE LPAREN RPAREN
-                    | VARIABLE PUNTO VARIABLE LPAREN valores RPAREN'''
+
 
 def p_creacion_mapa(p):
     '''creacionMapa : LLAVEABRE paresClaveValor LLAVECIERRA
-                        | VARIABLE'''
+                    | VARIABLE'''
 
 def p_pares_clave_valor(p):
     '''paresClaveValor : valores DOSPUNTOS valores
@@ -182,6 +196,7 @@ def p_valores(p):
                 | booleano
                 | VARIABLE
                 | llamadaFunciones
+                | VARIABLE PUNTO VARIABLE
                 '''
 
 def p_booleano(p):
