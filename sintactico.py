@@ -241,7 +241,18 @@ def p_error(p):
 #Tests
 code = '''import "A"; import "B"; 
 int suma(int a, int b){return a+b} 
-void main(){ int suma = suma(5,a); List<int> lista = []; if(lista.length == 0){ suma = 10;} else{ suma = 0;} for(int i=0; i<10; i+=1){} }
+void main(){ 
+    int suma = suma(5,a); 
+    List<int> lista = [];
+     if(lista.length == 0){ 
+        suma = 10;
+     }else{
+        suma = 0;
+     } 
+     for(int i=0; i<10; i+=1){
+        suma += suma(i,i);
+     }
+}
 int suma(int a, int b){return a+b} 
 int suma(int a, int b){return a+b} 
 '''
