@@ -1,21 +1,17 @@
 import ply.yacc as yacc
 from main import tokens
 
-# def p_bloque_codigo(p):
-#     '''bloque : expresion
-#                 | bloque expresion
-#                 | empty
-#                 | estructuras
-#                 | bloque estructuras
-#                 '''
+               
 def p_dart(p):
-    ''' dart : import funcion main'''
+    '''dart : import funcion main
+            | import main funcion
+            | import funcion main funcion'''
 
 def p_main(p):
-    ''' main : VOID MAIN LPAREN RPAREN LLAVEABRE bloque LLAVECIERRA'''
+    '''main : VOID MAIN LPAREN RPAREN LLAVEABRE bloque LLAVECIERRA'''
 
 def p_bloque(p):
-    ''' bloque : expresion
+    '''bloque : expresion
                | bloque expresion
                | empty'''
 
@@ -43,7 +39,8 @@ def p_funciones(p):
     '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE  bloque RETURN valoresRetorno LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
-                | empty'''
+                | empty
+                | funcion funcion'''
 
 def p_valoresRetorno(p):
     ''' valoresRetorno : valores
@@ -231,15 +228,22 @@ def p_error(p):
 #Termia parte de Miguel
  # Build the parser
 
+code = '''import "A"; import "B"; 
+int suma(int a, int b){return a+b} 
+void main(){ int suma = suma(5,a); List<int> lista = []; if(lista.length == 0){ suma = 10;} else{ suma = 0;} for(int i=0; i<10; i+=1){} }
+int suma(int a, int b){return a+b} 
+int suma(int a, int b){return a+b} 
+'''
+
 parser = yacc.yacc()
 flag= True
-while True:
-    try:
-        s = input('calc > ')
-    except EOFError:
-        break
-    if not s: continue
-    result = parser.parse(s)
-    print(s)
+while flag:
+    # try:
+    #     # s = input('calc > ')
+    # except EOFError:
+    #     break
+    # if not s: continue
+    result = parser.parse(code)
+    print(code)
     print(result)
     flag=False
