@@ -1,6 +1,13 @@
 import ply.yacc as yacc
 from main import tokens
 
+#Regla semántica Danny
+variables = []
+def verificarvariable( variable ):
+    if variable not in variables:
+        print("La variable " + variable + " esta siendo utilizada, pero no ha sido declarada")
+
+
 # Regla Dart: aportación de los 3          
 def p_dart(p):
     '''dart : import funcion main
@@ -68,6 +75,10 @@ def p_funcionFlecha(p):
 def p_llamadaFunciones(p):
     ''' llamadaFunciones : VARIABLE PUNTO VARIABLE LPAREN parametrosLlamada RPAREN
                          | VARIABLE LPAREN parametrosLlamada RPAREN '''
+    # Regla semántica Danny
+    if(p[2]=='.'):
+        verificarvariable(p[1])
+
 #Aportación de Danny
 def p_parametrosLlamada(p):
     ''' parametrosLlamada : parametrosFuncion
@@ -84,6 +95,9 @@ def p_estructurasControl(p):
 def p_aumento(p):
     ''' aumento : VARIABLE IGUAL operacion_aritmetica
                 | VARIABLE operadores_asignacion valores'''
+    #Regla semántica Danny
+    verificarvariable(p[1])
+
 #Aportación de Danny
 def p_estructuraIf(p):
     ''' estructuraIf : IF LPAREN argumentoEstructura  RPAREN LLAVEABRE bloque LLAVECIERRA
@@ -97,6 +111,8 @@ def p_argumentoEstructura(p):
     ''' argumentoEstructura : VARIABLE
                            | booleano
                            | comparacion'''
+
+
 #Aportación de los 3
 def p_estructurasDato(p):
     ''' estructurasDato : mapa
@@ -125,6 +141,12 @@ def p_asignacion(p):
                      | VARIABLE ASIGNACIONAUMENTADA valores
                      | VARIABLE ASIGNACIONDISMINUIDA valores
                      '''
+
+    if ( (p[2] != '=')  and (p[2] != '+=') and (p[2] != '-=') ):
+        variables.append(p[2])
+    else:
+        verificarvariable(p[1])
+
 #Aportación de Miguel
 def p_operadores_asignacion(p):
     '''operadores_asignacion : IGUAL
@@ -162,11 +184,15 @@ def p_set(p):
     ''' set : SET MENORQUE tipoDato MAYORQUE VARIABLE IGUAL creacionSet
             | VAR VARIABLE IGUAL creacionSet
             | SET MENORQUE tipoDato MAYORQUE VARIABLE IGUAL LLAVEABRE collecionObjetos LLAVECIERRA'''
+    #Regla semántica Danny
+    variables.append(p[5])
 
 #Aportación de Danny
 def p_list(p):
     ''' list : LIST MENORQUE tipoDato MAYORQUE VARIABLE IGUAL CORCHETEABRE collecionObjetos CORCHETECIERRA
              | LIST MENORQUE tipoDato MAYORQUE VARIABLE IGUAL LIST PUNTO VARIABLE LPAREN NUMERO COMA valores RPAREN '''
+    #Regla semántica Danny
+    variables.append(p[5])
 
 #Aportación de Raul
 def p_coleccionObj(p):
@@ -182,6 +208,8 @@ def p_creacionSet(p):
 def p_estructurasFunciones(p):
     ''' estructurasFunciones : VARIABLE PUNTO ADD LPAREN valores RPAREN
                             | VARIABLE PUNTO JOIN LPAREN CADENA RPAREN'''
+    #Regla semántica Danny
+    verificarvariable(p[1])
 
 #Aportación de Miguel
 def p_mapa(p):
@@ -204,6 +232,7 @@ def p_valores(p):
                 | llamadaFunciones
                 | VARIABLE PUNTO VARIABLE
                 '''
+
 
 def p_booleano(p):
     '''booleano : TRUE
@@ -244,6 +273,8 @@ code = '''import "A"; import "B";
 int suma(int a, int b){return a+b} 
 void main(){ 
     int suma = suma(5,a); 
+    int calculo = 5;
+    l.calcular();
     List<int> lista = [];
      if(lista.length == 0){ 
         suma = 10;
@@ -259,14 +290,14 @@ int suma(int a, int b){return a+b}
 '''
 
 parser = yacc.yacc()
-# flag= True
-# while flag:
-#     # try:
-#     #     # s = input('calc > ')
-#     # except EOFError:
-#     #     break
-#     # if not s: continue
-#     result = parser.parse(code)
-#     print(code)
-#     print(result)
-#     flag=False
+flag= True
+while flag:
+    #try:
+    #    s = input('calc > ')
+    #except EOFError:
+    #    break
+    #if not s: continue
+    result = parser.parse(code)
+    print(code)
+    print(result)
+    flag=False
