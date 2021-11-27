@@ -227,12 +227,13 @@ def p_nullValue(p):
 #Aportación de Raul  
 def p_print(p):
     ''' print : PRINT LPAREN valores RPAREN'''
+    
 #Aportación de Raul  
 def p_readPant(p):
     ''' readPant : STRING VARIABLE IGUAL STDIN PUNTO READLINE LPAREN RPAREN PUNTOCOMA'''
 
 # Error rule for syntax errors
-#Aportación de Danny  
+#Aportación de Danny  3
 def p_error(p):
     print("Syntax error in input!")
 #Termia parte de Miguel
@@ -258,14 +259,14 @@ int suma(int a, int b){return a+b}
 '''
 
 parser = yacc.yacc()
-flag= True
-while flag:
-    # try:
-    #     # s = input('calc > ')
-    # except EOFError:
-    #     break
-    # if not s: continue
-    result = parser.parse(code)
-    print(code)
-    print(result)
-    flag=False
+# flag= True
+# while flag:
+#     # try:
+#     #     # s = input('calc > ')
+#     # except EOFError:
+#     #     break
+#     # if not s: continue
+#     result = parser.parse(code)
+#     print(code)
+#     print(result)
+#     flag=False

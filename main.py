@@ -98,7 +98,7 @@ def t_CADENA(t):
     r'\".+\"'
     t.type = reserved.get(t.value,'CADENA')
     return t
-
+    
 def t_VARIABLE(t):
     r'[a-zA-Z$_][a-zA-Z\d$_]*'
     t.type = reserved.get(t.value,'VARIABLE')
