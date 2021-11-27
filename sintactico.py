@@ -108,10 +108,12 @@ def p_estructuraIfElse(p):
 
 #Aportación de Danny
 def p_argumentoEstructura(p):
-    ''' argumentoEstructura : VARIABLE
-                           | booleano
+    ''' argumentoEstructura : booleano
                            | comparacion'''
 
+def p_argumentoEstructuraVariable(p):
+    ''' argumentoEstructura : VARIABLE'''
+    verificarvariable(p[1])
 
 #Aportación de los 3
 def p_estructurasDato(p):
@@ -276,7 +278,7 @@ void main(){
     int calculo = 5;
     l.calcular();
     List<int> lista = [];
-     if(lista.length == 0){ 
+     if(s){ 
         suma = 10;
      }else{
         suma = 0;
