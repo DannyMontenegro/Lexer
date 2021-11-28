@@ -17,6 +17,7 @@ def verificarFunciones(funcion):
         funciones.append(funcion)
 
 
+errors = []
 
 # Regla Dart: aportación de los 3          
 def p_dart(p):
@@ -24,6 +25,11 @@ def p_dart(p):
             | import main funcion
             | import funcion main funcion'''
 #Terminada regla Dart
+
+def p_dart_error(p):
+    '''dart : import funcion'''
+    print("Error: Falta creacion de funcion main en el archivo")
+    errors.append("Error: Falta creacion de funcion main en el archivo")
 
 #Aportación de Danny
 def p_main(p):
@@ -54,9 +60,17 @@ def p_entradaSalidaDatos(p):
 def p_estructuraWhile(p):
     ''' estructuraWhile : WHILE LPAREN argumentoEstructura RPAREN LLAVEABRE bloque LLAVECIERRA
                         '''
+
 #Aportación de Danny
 def p_estructuraFor(p):
     ''' estructuraFor : FOR LPAREN asignacion PUNTOCOMA comparacion  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
+
+def p_estructuraFor_error(p):
+    ''' estructuraFor : FOR LPAREN asignacion error comparacion  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA
+                      | FOR LPAREN asignacion error comparacion  error aumento RPAREN LLAVEABRE bloque LLAVECIERRA
+                      | FOR LPAREN asignacion PUNTOCOMA comparacion  error aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
+    print("Error: Los argumentos de la estructura for deben estar separados por ';' Linea"+str(p.lineno(1)))              
+    errors.append("Error: Los argumentos de la estructura for deben estar separados por ';' Línea:"+str(p.lineno(1)))
 
 #Aportación de Miguel
 def p_funciones(p):
@@ -66,6 +80,7 @@ def p_funciones(p):
                 | funcion funcion'''
     if(len(p)>3):
         verificarFunciones(p[2])
+
 #Aportación de Miguel
 def p_parametrosFuncion(p):
     ''' parametrosFuncion : valores
@@ -123,6 +138,17 @@ def p_estructuraIf(p):
 def p_estructuraIfElse(p):
     '''  estructuraIfElse : estructuraIf ELSE LLAVEABRE bloque LLAVECIERRA'''
 
+#Error creado por Miguel
+def p_estrcuturaIf_error(p):
+    ''' estructuraIf : IF LPAREN error RPAREN LLAVEABRE bloque LLAVECIERRA'''
+    line = p.lineno(3)
+    print("Error en el argumento de comparación del if. Línea:"+str(line))
+    errors.append("Error en el argumento de comparación del if. Línea:"+str(line))
+    # for att in dir(p):
+    #     print (att, getattr(p,att))
+    # print(p.stack)
+
+
 #Aportación de Danny
 def p_argumentoEstructura(p):
     ''' argumentoEstructura : booleano
@@ -149,7 +175,7 @@ def p_parametros(p):
 def p_import(p):
     '''import : IMPORT CADENA PUNTOCOMA
               | import IMPORT CADENA PUNTOCOMA
-              | empty'''
+              | empty'''    
 
 #Aportación de Miguel
 def p_asignacion(p):
@@ -189,12 +215,12 @@ def p_operadores_aritmeticos(p):
                                 | DIVENTERA
                                 | RESIDUO'''
 
-
 #Aportación de Raul
 def p_comparacion(p):
     '''comparacion : valores comparador valores
                     | comparacion comparador valores
                     | valores IS tipoDato'''
+    
 #Aportación de Raul
 def p_comparador(p):
     '''comparador : MENORQUE
@@ -291,7 +317,8 @@ def p_readPant(p):
 # Error rule for syntax errors
 #Aportación de Danny  3
 def p_error(p):
-    print("Syntax error in input!")
+    for att in dir(p):     
+        print (att, getattr(p,att))
 #Termia parte de Miguel
  # Build the parser
 
@@ -307,9 +334,10 @@ void main(){
      }else{
         suma = 0;
      } 
-     for(int i=0; i<10; i+=1){
+     for(int i=0 i<10; i+=1){
         suma += suma(i,i);
      }
+     hola =7;
 }
 
 void vacio(){ } 
@@ -318,14 +346,26 @@ int suma(int a, int b){return a+b}
 '''
 
 parser = yacc.yacc()
-flag= True
-while flag:
-    #try:
-    #    s = input('calc > ')
-    #except EOFError:
-    #    break
-    #if not s: continue
-    result = parser.parse(code)
-    print(code)
-    print(result)
-    flag=False
+# parser.parse(code)
+# parser.restart()
+# for att in dir(parser):     
+#     print (att, getattr(parser,att))
+# parser = yacc.yacc()
+# parser.parse(code)
+# for att in dir(parser):     
+#     print (att, getattr(parser,att))
+# def restar_parser(self):
+#     self.parser = yacc.yacc()
+
+# flag= True
+# while flag:
+#     # try:
+#     #     # s = input('calc > ')
+#     # except EOFError:
+#     #     break
+#     # if not s: continue
+#     result = parser.parse(code)
+#     print(code)
+#     print(result)
+#     flag=False
+
