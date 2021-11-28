@@ -183,8 +183,8 @@ def p_asignacion(p):
                      | tipoDato VARIABLE IGUAL valores
                      | VARIABLE IGUAL comparacion
                      | BOOL VARIABLE IGUAL comparacion
-                     | tipoDato VARIABLE IGUAL operacion_numerica
-                     | VARIABLE IGUAL operacion_numerica
+                     | tipoDato VARIABLE IGUAL operacion_aritmetica
+                     | VARIABLE IGUAL operacion_aritmetica
                      | VARIABLE ASIGNACIONAUMENTADA valores
                      | VARIABLE ASIGNACIONDISMINUIDA valores
                      '''
@@ -203,18 +203,11 @@ def p_operadores_asignacion(p):
 def p_operacion_aritmetica(p):
     '''operacion_aritmetica : valores operadores_aritmeticos valores
                             | operacion_aritmetica operadores_aritmeticos valores'''
-
-
-def p_operacion_numerica(p):
-    ''' operacion_numerica : valoresNum operadores_aritmeticos valoresNum
-                           | operacion_numerica operadores_aritmeticos valoresNum'''
     if (type(p[1]) != type(p[3])):
-        print("No se puede realizar la suma ya que "+ str(p[1]) +" y "+ str(p[3]) +" deben ser ambos int o str")
+        print("No se puede realizar la suma ya que "+ str(p[1]) +" y "+ str(p[3]) +" deben ser del mismo tipo de dato")
 
-def p_valoresNum(p):
-    ''' valoresNum : NUMERO
-                    | CADENA'''
-    p[0] = p[1]
+
+
 
 #Aportación de Miguel
 def p_operadores_aritmeticos(p):
