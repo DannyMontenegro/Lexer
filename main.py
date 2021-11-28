@@ -1,5 +1,7 @@
 import ply.lex as lex
 
+errores_lexicos = []
+
 reserved = {
     #Parte de Miguel Licea
     'if':'IF',
@@ -154,7 +156,8 @@ t_ignore = ' \t'
 
 # Error handling rule
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    #print("Illegal character '%s'" % t.value[0])
+    errores_lexicos.append("No se reconoció el token " + str(t.value[0]) + " en la linea " + str(t.lexer.lineno))
     t.lexer.skip(1)
 
 

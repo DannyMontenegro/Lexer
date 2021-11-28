@@ -8,16 +8,19 @@ funciones = []
 
 def verificarvariable( variable):
     if variable not in variables:
-        print("La variable " + variable + " esta siendo utilizada, pero no ha sido declarada")
+        errores_semanticos.append("La variable " + variable + " esta siendo utilizada, pero no ha sido declarada")
+        #print("La variable " + variable + " esta siendo utilizada, pero no ha sido declarada")
 
 def verificarFunciones(funcion):
     if funcion in funciones:
-        print("La función "+ funcion +" ya ha sido declarada previamente")
+        #print("La función "+ funcion +" ya ha sido declarada previamente")
+        errores_semanticos.append("La función "+ funcion +" ya ha sido declarada previamente")
     else:
         funciones.append(funcion)
 
 
 errors = []
+errores_semanticos = []
 
 # Regla Dart: aportación de los 3          
 def p_dart(p):
@@ -28,7 +31,7 @@ def p_dart(p):
 
 def p_dart_error(p):
     '''dart : import funcion'''
-    print("Error: Falta creacion de funcion main en el archivo")
+    #print("Error: Falta creacion de funcion main en el archivo")
     errors.append("Error: Falta creacion de funcion main en el archivo")
 
 #Aportación de Danny
@@ -51,6 +54,10 @@ def p_expresion(p):
                 | entradaSalidaDatos PUNTOCOMA
                 | funcionFlecha PUNTOCOMA'''
 
+def p_expresion_error(p):
+    ''' expresion : error PUNTOCOMA'''
+    errors.append("Error sintactico en linea " + str(p.lineno(1)))
+
 # Aportación de Raul
 def p_entradaSalidaDatos(p):
     ''' entradaSalidaDatos : print
@@ -69,7 +76,7 @@ def p_estructuraFor_error(p):
     ''' estructuraFor : FOR LPAREN asignacion error comparacion  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA
                       | FOR LPAREN asignacion error comparacion  error aumento RPAREN LLAVEABRE bloque LLAVECIERRA
                       | FOR LPAREN asignacion PUNTOCOMA comparacion  error aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
-    print("Error: Los argumentos de la estructura for deben estar separados por ';' Linea"+str(p.lineno(1)))              
+    #print("Error: Los argumentos de la estructura for deben estar separados por ';' Linea"+str(p.lineno(1)))
     errors.append("Error: Los argumentos de la estructura for deben estar separados por ';' Línea:"+str(p.lineno(1)))
 
 #Aportación de Miguel
@@ -187,6 +194,7 @@ def p_asignacion(p):
                      | VARIABLE IGUAL operacion_aritmetica
                      | VARIABLE ASIGNACIONAUMENTADA valores
                      | VARIABLE ASIGNACIONDISMINUIDA valores
+                     | tipoDato VARIABLE
                      '''
 
     if ( (p[2] != '=')  and (p[2] != '+=') and (p[2] != '-=') ):
@@ -204,8 +212,8 @@ def p_operacion_aritmetica(p):
     '''operacion_aritmetica : valores operadores_aritmeticos valores
                             | operacion_aritmetica operadores_aritmeticos valores'''
     if (type(p[1]) != type(p[3])):
-        print("No se puede realizar la suma ya que "+ str(p[1]) +" y "+ str(p[3]) +" deben ser del mismo tipo de dato")
-
+        #print("No se puede realizar la suma ya que "+ str(p[1]) +" y "+ str(p[3]) +" deben ser del mismo tipo de dato")
+        errores_semanticos.append("No se puede realizar la suma ya que "+ str(p[1]) +" y "+ str(p[3]) +" deben ser del mismo tipo de dato")
 
 
 
@@ -323,15 +331,16 @@ def p_readPant(p):
 # Error rule for syntax errors
 #Aportación de Danny  3
 def p_error(p):
-    for att in dir(p):
-        print (att, getattr(p,att))
+    print()
+
 #Termia parte de Miguel
  # Build the parser
 
 #Tests
 code = '''import "A"; import "B"; 
 int suma(int a, int b){return a+b} 
-void main(){ 
+void main(){
+    int a = ;
     int suma = suma(5,a,b); 
     int calculo = 5 + "ABC";
     List<int> lista = [];
@@ -363,15 +372,15 @@ parser = yacc.yacc()
 # def restar_parser(self):
 #     self.parser = yacc.yacc()
 
-flag= True
-while flag:
-    # try:
-    #     # s = input('calc > ')
-    # except EOFError:
-    #     break
-    # if not s: continue
-    result = parser.parse(code)
-    #print(code)
-    print(result)
-    flag=False
+# flag= True
+# while flag:
+#     # try:
+#     #     # s = input('calc > ')
+#     # except EOFError:
+#     #     break
+#     # if not s: continue
+#     result = parser.parse(code)
+#     print(code)
+#     print(result)
+#     flag=False
 
