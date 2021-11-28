@@ -3,9 +3,19 @@ from main import tokens
 
 #Regla semántica Danny
 variables = []
-def verificarvariable( variable ):
+funciones = []
+
+
+def verificarvariable( variable):
     if variable not in variables:
         print("La variable " + variable + " esta siendo utilizada, pero no ha sido declarada")
+
+def verificarFunciones(funcion):
+    if funcion in funciones:
+        print("La función "+ funcion +" ya ha sido declarada previamente")
+    else:
+        funciones.append(funcion)
+
 
 
 # Regla Dart: aportación de los 3          
@@ -52,14 +62,17 @@ def p_estructuraFor(p):
 def p_funciones(p):
     '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE  bloque RETURN valoresRetorno LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
-                | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque RETURN PUNTOCOMA LLAVECIERRA
                 | empty
                 | funcion funcion'''
+    if(len(p)>3):
+        verificarFunciones(p[2])
 #Aportación de Miguel
 def p_parametrosFuncion(p):
     ''' parametrosFuncion : valores
                           | parametrosFuncion COMA valores
                           '''
+
+
 #Aportación de Danny
 def p_valoresRetorno(p):
     ''' valoresRetorno : valores
@@ -78,11 +91,15 @@ def p_llamadaFunciones(p):
     # Regla semántica Danny
     if(p[2]=='.'):
         verificarvariable(p[1])
+    #if(len(p)==5):
+        #funciones_llamadas[p[1]] = 0
+
 
 #Aportación de Danny
 def p_parametrosLlamada(p):
     ''' parametrosLlamada : parametrosFuncion
                           | empty'''
+
 
 
 #Aportación de Danny
@@ -126,6 +143,8 @@ def p_parametros(p):
                     | tipoDato VARIABLE
                     | empty'''
 
+
+
 #Aportación de Miguel
 def p_import(p):
     '''import : IMPORT CADENA PUNTOCOMA
@@ -158,6 +177,8 @@ def p_operadores_asignacion(p):
 def p_operacion_aritmetica(p):
     '''operacion_aritmetica : valores operadores_aritmeticos valores
                             | operacion_aritmetica operadores_aritmeticos valores'''
+
+
 
 #Aportación de Miguel
 def p_operadores_aritmeticos(p):
@@ -225,15 +246,19 @@ def p_creacion_mapa(p):
 def p_pares_clave_valor(p):
     '''paresClaveValor : valores DOSPUNTOS valores
                         | paresClaveValor COMA valores DOSPUNTOS valores'''
+
+
 #Aportación de los 3
 def p_valores(p):
     '''valores : NUMERO
+                | VARIABLE
                 | CADENA
                 | booleano
-                | VARIABLE
                 | llamadaFunciones
                 | VARIABLE PUNTO VARIABLE
                 '''
+    if(len(p) == 4):
+        verificarvariable(p[1])
 
 
 def p_booleano(p):
@@ -274,11 +299,10 @@ def p_error(p):
 code = '''import "A"; import "B"; 
 int suma(int a, int b){return a+b} 
 void main(){ 
-    int suma = suma(5,a); 
+    int suma = suma(5,a,b); 
     int calculo = 5;
-    l.calcular();
     List<int> lista = [];
-     if(s){ 
+     if(s.length>0){ 
         suma = 10;
      }else{
         suma = 0;
@@ -287,8 +311,10 @@ void main(){
         suma += suma(i,i);
      }
 }
+
+void vacio(){ } 
 int suma(int a, int b){return a+b} 
-int suma(int a, int b){return a+b} 
+int suma(int a, int b){return a+b}
 '''
 
 parser = yacc.yacc()
