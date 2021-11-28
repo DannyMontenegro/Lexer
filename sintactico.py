@@ -183,8 +183,8 @@ def p_asignacion(p):
                      | tipoDato VARIABLE IGUAL valores
                      | VARIABLE IGUAL comparacion
                      | BOOL VARIABLE IGUAL comparacion
-                     | tipoDato VARIABLE IGUAL operacion_aritmetica
-                     | VARIABLE IGUAL operacion_aritmetica
+                     | tipoDato VARIABLE IGUAL operacion_numerica
+                     | VARIABLE IGUAL operacion_numerica
                      | VARIABLE ASIGNACIONAUMENTADA valores
                      | VARIABLE ASIGNACIONDISMINUIDA valores
                      '''
@@ -205,6 +205,16 @@ def p_operacion_aritmetica(p):
                             | operacion_aritmetica operadores_aritmeticos valores'''
 
 
+def p_operacion_numerica(p):
+    ''' operacion_numerica : valoresNum operadores_aritmeticos valoresNum
+                           | operacion_numerica operadores_aritmeticos valoresNum'''
+    if (type(p[1]) != type(p[3])):
+        print("No se puede realizar la suma ya que "+ str(p[1]) +" y "+ str(p[3]) +" deben ser ambos int o str")
+
+def p_valoresNum(p):
+    ''' valoresNum : NUMERO
+                    | CADENA'''
+    p[0] = p[1]
 
 #Aportación de Miguel
 def p_operadores_aritmeticos(p):
@@ -214,6 +224,7 @@ def p_operadores_aritmeticos(p):
                                 | DIVISION
                                 | DIVENTERA
                                 | RESIDUO'''
+    p[0] = p[1]
 
 #Aportación de Raul
 def p_comparacion(p):
@@ -283,8 +294,10 @@ def p_valores(p):
                 | llamadaFunciones
                 | VARIABLE PUNTO VARIABLE
                 '''
+    p[0] = p[1]
     if(len(p) == 4):
         verificarvariable(p[1])
+
 
 
 def p_booleano(p):
@@ -317,7 +330,7 @@ def p_readPant(p):
 # Error rule for syntax errors
 #Aportación de Danny  3
 def p_error(p):
-    for att in dir(p):     
+    for att in dir(p):
         print (att, getattr(p,att))
 #Termia parte de Miguel
  # Build the parser
@@ -327,7 +340,7 @@ code = '''import "A"; import "B";
 int suma(int a, int b){return a+b} 
 void main(){ 
     int suma = suma(5,a,b); 
-    int calculo = 5;
+    int calculo = 5 + "ABC";
     List<int> lista = [];
      if(s.length>0){ 
         suma = 10;
@@ -357,15 +370,15 @@ parser = yacc.yacc()
 # def restar_parser(self):
 #     self.parser = yacc.yacc()
 
-# flag= True
-# while flag:
-#     # try:
-#     #     # s = input('calc > ')
-#     # except EOFError:
-#     #     break
-#     # if not s: continue
-#     result = parser.parse(code)
-#     print(code)
-#     print(result)
-#     flag=False
+flag= True
+while flag:
+    # try:
+    #     # s = input('calc > ')
+    # except EOFError:
+    #     break
+    # if not s: continue
+    result = parser.parse(code)
+    #print(code)
+    print(result)
+    flag=False
 
