@@ -19,24 +19,26 @@ def verificarFunciones(funcion):
         funciones.append(funcion)
 
 
+
 errors = []
 errores_semanticos = []
 
 # Regla Dart: aportación de los 3          
 def p_dart(p):
-    '''dart : import funcion main
+    '''dart : import funcion
             | import main funcion
             | import funcion main funcion'''
 #Terminada regla Dart
 
-def p_dart_error(p):
-    '''dart : import funcion'''
-    #print("Error: Falta creacion de funcion main en el archivo")
-    errors.append("Error: Falta creacion de funcion main en el archivo")
+# def p_dart_error(p):
+#     '''dart : import funcion'''
+#     #print("Error: Falta creacion de funcion main en el archivo")
+#     errors.append("Error: Falta creacion de funcion main en el archivo")
 
 #Aportación de Danny
 def p_main(p):
     '''main : VOID MAIN LPAREN RPAREN LLAVEABRE bloque LLAVECIERRA'''
+    funciones.append("main")
 
 #Aportación de Miguel
 def p_bloque(p):
@@ -56,7 +58,7 @@ def p_expresion(p):
 
 def p_expresion_error(p):
     ''' expresion : error PUNTOCOMA'''
-    errors.append("Error sintactico en linea " + str(p.lineno(1)))
+    #errors.append("Error sintactico en linea " + str(p.lineno(1)))
 
 # Aportación de Raul
 def p_entradaSalidaDatos(p):
@@ -83,6 +85,7 @@ def p_estructuraFor_error(p):
 def p_funciones(p):
     '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE  bloque RETURN valoresRetorno LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
+                | main
                 | empty
                 | funcion funcion'''
     if(len(p)>3):
@@ -331,7 +334,12 @@ def p_readPant(p):
 # Error rule for syntax errors
 #Aportación de Danny  3
 def p_error(p):
-    print()
+    if not p:
+        print("EOF")
+        return
+    else:
+        errors.append("Error sintáctico en la linea " + str(p.lineno))
+        #print("Not EOF " +str(p.lineno) + str(parser.token()))
 
 #Termia parte de Miguel
  # Build the parser
