@@ -83,13 +83,17 @@ def p_estructuraFor_error(p):
 
 #Aportación de Miguel
 def p_funciones(p):
-    '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE  bloque RETURN valoresRetorno LLAVECIERRA
+    '''funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE  bloque RETURN valoresRetorno PUNTOCOMA LLAVECIERRA
                 | VOID VARIABLE LPAREN parametros RPAREN LLAVEABRE bloque LLAVECIERRA
                 | main
                 | empty
                 | funcion funcion'''
     if(len(p)>3):
         verificarFunciones(p[2])
+
+def p_funciones_error(p):
+    ''' funcion : tipoDato VARIABLE LPAREN parametros RPAREN LLAVEABRE  bloque RETURN valoresRetorno error LLAVECIERRA '''
+
 
 #Aportación de Miguel
 def p_parametrosFuncion(p):
