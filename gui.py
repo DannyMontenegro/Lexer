@@ -11,6 +11,8 @@ def verificarSintax():
     #print(entrada)
     lexer.lineno = 1
     resultado = str(parser.parse(entrada))
+    if "main" not in funciones:
+        errors.append("No se ha declarado la función main en el documento")
     # print("Analizando")
     #print(resultado)
     if(resultado=='None' and (len(errors)==0)):
