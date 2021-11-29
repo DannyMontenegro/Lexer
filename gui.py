@@ -75,17 +75,19 @@ textArea = Text(raiz,width=40,height=15)
 textArea.pack()
 
 Button(raiz,text="Analisis Sintactico",command=verificarSintax).pack()
+'''
 varSalida = StringVar()
 labelSalida = Label( raiz, textvariable=varSalida,)
 varSalida.set("Salida:")
-labelSalida.pack()
+labelSalida.pack()'''
 
 
 Button(raiz,text="Analisis Léxico",command=verificarLex).pack()
+'''
 varSalida = StringVar()
 labelSalida = Label( raiz, textvariable=varSalida,)
 varSalida.set("Salida:")
-labelSalida.pack()
+labelSalida.pack()'''
 
 Button(raiz,text="Analisis Semántico",command=verificarSem).pack()
 varSalida = StringVar()
