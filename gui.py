@@ -18,32 +18,32 @@ def verificarSintax():
     if(resultado=='None' and (len(errors)==0)):
         varSalida.set("Salida: No hay errores sintácticos en su código")
     else:
+        print(errors)
         sintacticos = '\n'.join(errors)
         salida = 'Errores sintáticos: ' + sintacticos
         varSalida.set(salida)
-        errors.clear()
-        errores_lexicos.clear()
-        errores_semanticos.clear()
-        variables.clear()
-        funciones.clear()
         parser.defaulted_states = {}
+    vaciasListas()
 
 def verificarLex():
     entrada = textArea.get(1.0, "end-1c")
     # print(entrada.count('\n'))
     # print(entrada)
     lexer.lineno = 1
-    resultado = str(parser.parse(entrada))
-    if (resultado == 'None' and len(errores_lexicos)==0):
+    #resultado = str(parser.parse(entrada))
+    resultado = str(lexer.input(entrada))
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+    if (resultado=='None' and len(errores_lexicos)==0):
         varSalida.set("Salida: No hay errores Léxicos en su código")
     else:
         lexicos = '\n'.join(errores_lexicos)
-        salida =salida = "Errores lexicos: "+ lexicos + '\n'
+        salida = "Errores lexicos: "+ lexicos + '\n'
         varSalida.set(salida)
-        errores_lexicos.clear()
-        variables.clear()
-        funciones.clear()
         parser.defaulted_states = {}
+    vaciasListas()
 
 
 def verificarSem():
@@ -58,10 +58,15 @@ def verificarSem():
         semanticos = '\n'.join(errores_semanticos)
         salida = salida = 'Errores Semánticos: ' + semanticos
         varSalida.set(salida)
-        errores_semanticos.clear()
-        variables.clear()
-        funciones.clear()
         parser.defaulted_states = {}
+    vaciasListas()
+
+def vaciasListas():
+    errors.clear()
+    errores_lexicos.clear()
+    errores_semanticos.clear()
+    variables.clear()
+    funciones.clear()
 
 raiz.title("Proyecto LP")
 raiz.geometry("700x500")

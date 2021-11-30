@@ -38,7 +38,7 @@ def p_dart(p):
 #Aportación de Danny
 def p_main(p):
     '''main : VOID MAIN LPAREN RPAREN LLAVEABRE bloque LLAVECIERRA'''
-    funciones.append("main")
+    verificarFunciones(p[2])
 
 #Aportación de Miguel
 def p_bloque(p):
@@ -58,7 +58,7 @@ def p_expresion(p):
 
 def p_expresion_error(p):
     ''' expresion : error PUNTOCOMA'''
-    #errors.append("Error sintactico en linea " + str(p.lineno(1)))
+    # errors.append("Error sintactico en linea " + str(p.lineno(1)))
 
 # Aportación de Raul
 def p_entradaSalidaDatos(p):
@@ -70,6 +70,14 @@ def p_estructuraWhile(p):
     ''' estructuraWhile : WHILE LPAREN argumentoEstructura RPAREN LLAVEABRE bloque LLAVECIERRA
                         '''
 
+#Error creado por Danny
+def p_estrcuturaWhile_error(p):
+    ''' estructuraWhile : WHILE LPAREN error RPAREN LLAVEABRE bloque LLAVECIERRA'''
+    line = p.lineno(3)
+    # print("Error en el argumento de comparación del if. Línea:"+str(line))
+    errors.pop()
+    errors.append("Error en el argumento de comparación del while. Línea:"+str(line))
+
 #Aportación de Danny
 def p_estructuraFor(p):
     ''' estructuraFor : FOR LPAREN asignacion PUNTOCOMA comparacion  PUNTOCOMA aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
@@ -79,6 +87,7 @@ def p_estructuraFor_error(p):
                       | FOR LPAREN asignacion error comparacion  error aumento RPAREN LLAVEABRE bloque LLAVECIERRA
                       | FOR LPAREN asignacion PUNTOCOMA comparacion  error aumento RPAREN LLAVEABRE bloque LLAVECIERRA'''
     #print("Error: Los argumentos de la estructura for deben estar separados por ';' Linea"+str(p.lineno(1)))
+    errors.pop()
     errors.append("Error: Los argumentos de la estructura for deben estar separados por ';' Línea:"+str(p.lineno(1)))
 
 #Aportación de Miguel
@@ -156,12 +165,9 @@ def p_estructuraIfElse(p):
 def p_estrcuturaIf_error(p):
     ''' estructuraIf : IF LPAREN error RPAREN LLAVEABRE bloque LLAVECIERRA'''
     line = p.lineno(3)
-    print("Error en el argumento de comparación del if. Línea:"+str(line))
+    # print("Error en el argumento de comparación del if. Línea:"+str(line))
+    errors.pop()
     errors.append("Error en el argumento de comparación del if. Línea:"+str(line))
-    # for att in dir(p):
-    #     print (att, getattr(p,att))
-    # print(p.stack)
-
 
 #Aportación de Danny
 def p_argumentoEstructura(p):
@@ -356,7 +362,7 @@ void main(){
     int suma = suma(5,a,b); 
     int calculo = 5 + "ABC";
     List<int> lista = [];
-     if(s.length>0){ 
+     if(){ 
         suma = 10;
      }else{
         suma = 0;
@@ -365,6 +371,7 @@ void main(){
         suma += suma(i,i);
      }
      hola =7;
+     while(){}
 }
 
 void vacio(){ } 
