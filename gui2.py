@@ -57,15 +57,12 @@ class App:
             if (resultado == 'None' and (len(errors) == 0)):
                 varSalida.set("Salida: No hay errores sintácticos en su código")
             else:
+                print(errors)
                 sintacticos = '\n'.join(errors)
                 salida = 'Errores sintáticos: ' + sintacticos
                 varSalida.set(salida)
-                errors.clear()
-                errores_lexicos.clear()
-                errores_semanticos.clear()
-                variables.clear()
-                funciones.clear()
                 parser.defaulted_states = {}
+            vaciasListas()
 
         btn_sint=tk.Button(root,command=verificarSintax)
         btn_sint["bg"] = "#e9e9ed"
@@ -82,17 +79,20 @@ class App:
             # print(entrada.count('\n'))
             # print(entrada)
             lexer.lineno = 1
-            resultado = str(parser.parse(entrada))
+            # resultado = str(parser.parse(entrada))
+            resultado = str(lexer.input(entrada))
+            while True:
+                tok = lexer.token()
+                if not tok:
+                    break
             if (resultado == 'None' and len(errores_lexicos) == 0):
                 varSalida.set("Salida: No hay errores Léxicos en su código")
             else:
                 lexicos = '\n'.join(errores_lexicos)
-                salida = salida = "Errores lexicos: " + lexicos + '\n'
+                salida = "Errores lexicos: " + lexicos + '\n'
                 varSalida.set(salida)
-                errores_lexicos.clear()
-                variables.clear()
-                funciones.clear()
                 parser.defaulted_states = {}
+            vaciasListas()
 
         btn_lex=tk.Button(root,command=verificarLex)
         btn_lex["bg"] = "#e9e9ed"
@@ -116,10 +116,15 @@ class App:
                 semanticos = '\n'.join(errores_semanticos)
                 salida = salida = 'Errores Semánticos: ' + semanticos
                 varSalida.set(salida)
-                errores_semanticos.clear()
-                variables.clear()
-                funciones.clear()
                 parser.defaulted_states = {}
+            vaciasListas()
+
+        def vaciasListas():
+            errors.clear()
+            errores_lexicos.clear()
+            errores_semanticos.clear()
+            variables.clear()
+            funciones.clear()
 
         btn_sem=tk.Button(root,command=verificarSem)
         btn_sem["bg"] = "#e9e9ed"
