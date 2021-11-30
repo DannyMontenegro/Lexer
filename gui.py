@@ -38,7 +38,7 @@ def verificarLex():
         varSalida.set("Salida: No hay errores Léxicos en su código")
     else:
         lexicos = '\n'.join(errores_lexicos)
-        salida =salida = "Errores lexicos: "+ lexicos + '\n'
+        salida = "Errores lexicos: "+ lexicos + '\n'
         varSalida.set(salida)
         errores_lexicos.clear()
         variables.clear()
