@@ -18,15 +18,12 @@ def verificarSintax():
     if(resultado=='None' and (len(errors)==0)):
         varSalida.set("Salida: No hay errores sintácticos en su código")
     else:
+        print(errors)
         sintacticos = '\n'.join(errors)
         salida = 'Errores sintáticos: ' + sintacticos
         varSalida.set(salida)
-        errors.clear()
-        errores_lexicos.clear()
-        errores_semanticos.clear()
-        variables.clear()
-        funciones.clear()
         parser.defaulted_states = {}
+    vaciasListas()
 
 def verificarLex():
     entrada = textArea.get(1.0, "end-1c")
@@ -40,10 +37,8 @@ def verificarLex():
         lexicos = '\n'.join(errores_lexicos)
         salida = "Errores lexicos: "+ lexicos + '\n'
         varSalida.set(salida)
-        errores_lexicos.clear()
-        variables.clear()
-        funciones.clear()
         parser.defaulted_states = {}
+    vaciasListas()
 
 
 def verificarSem():
@@ -58,10 +53,15 @@ def verificarSem():
         semanticos = '\n'.join(errores_semanticos)
         salida = salida = 'Errores Semánticos: ' + semanticos
         varSalida.set(salida)
-        errores_semanticos.clear()
-        variables.clear()
-        funciones.clear()
         parser.defaulted_states = {}
+    vaciasListas()
+
+def vaciasListas():
+    errors.clear()
+    errores_lexicos.clear()
+    errores_semanticos.clear()
+    variables.clear()
+    funciones.clear()
 
 raiz.title("Proyecto LP")
 raiz.geometry("700x500")
