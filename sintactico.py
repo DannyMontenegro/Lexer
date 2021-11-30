@@ -38,7 +38,7 @@ def p_dart(p):
 #Aportación de Danny
 def p_main(p):
     '''main : VOID MAIN LPAREN RPAREN LLAVEABRE bloque LLAVECIERRA'''
-    funciones.append("main")
+    verificarFunciones(p[2])
 
 #Aportación de Miguel
 def p_bloque(p):
