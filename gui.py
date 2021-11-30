@@ -30,8 +30,13 @@ def verificarLex():
     # print(entrada.count('\n'))
     # print(entrada)
     lexer.lineno = 1
-    resultado = str(parser.parse(entrada))
-    if (resultado == 'None' and len(errores_lexicos)==0):
+    #resultado = str(parser.parse(entrada))
+    resultado = str(lexer.input(entrada))
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+    if (resultado=='None' and len(errores_lexicos)==0):
         varSalida.set("Salida: No hay errores Léxicos en su código")
     else:
         lexicos = '\n'.join(errores_lexicos)
