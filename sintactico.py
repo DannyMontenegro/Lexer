@@ -5,12 +5,13 @@ from main import tokens
 variables = []
 funciones = []
 
-
+#Aportacion Danny
 def verificarvariable( variable):
     if variable not in variables:
         errores_semanticos.append("La variable " + variable + " esta siendo utilizada, pero no ha sido declarada")
         #print("La variable " + variable + " esta siendo utilizada, pero no ha sido declarada")
 
+#Aportacion Miguel
 def verificarFunciones(funcion):
     if funcion in funciones:
         #print("La función "+ funcion +" ya ha sido declarada previamente")
@@ -224,6 +225,7 @@ def p_operadores_asignacion(p):
 def p_operacion_aritmetica(p):
     '''operacion_aritmetica : valores operadores_aritmeticos valores
                             | operacion_aritmetica operadores_aritmeticos valores'''
+    # Regla semantica aportacion RAUl
     if (type(p[1]) != type(p[3])):
         #print("No se puede realizar la suma ya que "+ str(p[1]) +" y "+ str(p[3]) +" deben ser del mismo tipo de dato")
         errores_semanticos.append("No se puede realizar la suma ya que "+ str(p[1]) +" y "+ str(p[3]) +" deben ser del mismo tipo de dato")
