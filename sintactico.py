@@ -121,7 +121,8 @@ def p_valoresRetorno(p):
                        | operacion_aritmetica'''
 #Aportación de Danny
 def p_funcionFlecha(p):
-    ''' funcionFlecha : tipoDato VARIABLE LPAREN parametros RPAREN FLECHA expresion'''
+    ''' funcionFlecha : tipoDato VARIABLE LPAREN parametros RPAREN FLECHA expresion
+                      | tipoDato VARIABLE LPAREN parametros RPAREN FLECHA valores'''
 
 #Aportación de los 3
 def p_llamadaFunciones(p):

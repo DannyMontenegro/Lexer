@@ -97,7 +97,7 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 
 def t_CADENA(t):
-    r'\".+\"'
+    r'\".*\"'
     t.type = reserved.get(t.value,'CADENA')
     return t
     
