@@ -90,12 +90,15 @@ class App:
             lexer.lineno = 1
             # resultado = str(parser.parse(entrada))
             resultado = str(lexer.input(entrada))
+            salida = ""
             while True:
                 tok = lexer.token()
+                salida += str(tok)
+                salida += "\n"
                 if not tok:
                     break
             if (resultado == 'None' and len(errores_lexicos) == 0):
-                varSalida.set("Salida: No hay errores Léxicos en su código")
+                varSalida.set(salida)
             else:
                 lexicos = '\n'.join(errores_lexicos)
                 salida = "Errores lexicos: " + lexicos + '\n'
